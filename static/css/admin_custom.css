@@ -1,86 +1,111 @@
-/* static/css/admin_custom.css (Versión con colores más suaves) */
+/* static/css/admin_custom.css (Versión con Estilo Spotify) */
 
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap');
+/* Importamos una fuente similar a la de Spotify (Montserrat) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
 
 :root {
-    /* --- NUEVA PALETA DE COLORES "VINTAGE" --- */
-    --primary: #c5a05a;        /* Un "oro viejo" en lugar de amarillo brillante */
-    --primary-hover: #d9b87c;  /* Un oro un poco más claro para el hover */
-    --bg-dark: #212529;         /* Un gris muy oscuro, casi negro, menos duro que el #000 */
-    --bg-surface: #343a40;      /* Un gris medio para las superficies de los módulos */
-    --text-color: #ced4da;      /* Un blanco roto, más suave que el blanco puro */
-    --border-color: #495057;   /* Un gris para los bordes */
+    /* --- PALETA DE COLORES SPOTIFY --- */
+    --primary: #1DB954;         /* Verde Spotify */
+    --primary-hover: #1ED760;   /* Un verde más brillante para el hover */
+    --bg-dark: #121212;         /* Negro Spotify */
+    --bg-surface: #181818;       /* Gris muy oscuro para las superficies */
+    --text-color: #FFFFFF;       /* Blanco puro para el texto */
+    --text-secondary: #b3b3b3;   /* Gris claro para texto secundario */
+    --border-color: #282828;     /* Gris para los bordes */
 }
 
 body, #content {
     background: var(--bg-dark);
     color: var(--text-color);
-    font-family: 'Roboto', sans-serif;
+    /* Usamos la nueva tipografía en todo el cuerpo */
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* --- Cabecera Principal --- */
 #header {
-    background: var(--bg-dark);
-    color: var(--primary);
-    border-bottom: 3px solid var(--primary);
+    background: var(--bg-surface);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
 }
 #header a:link, #header a:visited {
     color: var(--text-color);
 }
 #branding h1, #branding h1 a:link, #branding h1 a:visited {
-    color: var(--primary);
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
+    color: var(--text-color);
+    font-weight: 900; /* Usamos el peso más grueso de la fuente */
 }
 
 /* --- Módulos y Tablas --- */
 .module {
     background: var(--bg-surface);
-    border: 1px solid var(--border-color);
+    border: none; /* Quitamos los bordes para un look más plano */
+    border-radius: 8px; /* Bordes redondeados */
 }
 .module caption, .module h2, .inline-group h2 {
     background: var(--bg-surface);
-    border-bottom: 1px solid var(--border-color);
     color: var(--text-color);
-    font-family: 'Oswald', sans-serif;
-    text-transform: uppercase;
+    font-weight: 700;
+    text-transform: none; /* Quitamos el uppercase para un look más moderno */
+    font-size: 1.5rem;
+    padding-left: 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 table {
     background: var(--bg-dark);
+    border: none;
 }
-tr:nth-child(odd), .row-form-errors {
-    background: #2a2e32; /* Un gris ligeramente diferente para las filas impares */
+thead th {
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-size: 0.8rem;
 }
-.form-row {
-    border-bottom: 1px solid var(--border-color);
+tr:nth-child(odd) {
+    background: transparent;
 }
 
 /* --- Enlaces y Botones --- */
 a:link, a:visited {
-    color: var(--primary);
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.2s;
 }
 a:hover {
-    color: var(--primary-hover);
+    color: var(--primary);
 }
 .button, input[type=submit], input[type=button], .submit-row input, a.button {
     background: var(--primary);
-    color: var(--bg-dark);
+    color: #000;
     border: none;
-    border-radius: 4px;
-    font-family: 'Oswald', sans-serif;
+    /* Bordes muy redondeados, estilo Spotify */
+    border-radius: 500px; 
+    font-family: 'Montserrat', sans-serif;
     font-weight: 700 !important;
     text-transform: uppercase;
-}
-.button.default, input[type=submit].default, .submit-row input.default {
-    font-weight: 700 !important;
+    padding: 10px 24px;
+    transition: background-color 0.2s, transform 0.2s;
 }
 .button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover, a.button:hover {
     background: var(--primary-hover);
+    transform: scale(1.05); /* Efecto de crecimiento al pasar el mouse */
 }
+.button.default, input[type=submit].default {
+    background: #535353;
+    color: #fff;
+}
+ .button.default:hover, input[type=submit].default:hover {
+    background: #737373;
+ }
 
 /* --- Breadcrumbs (Migas de pan) --- */
 div.breadcrumbs {
     background: var(--bg-surface);
-    border-bottom: 1px solid var(--border-color);
-    padding: 10px 40px;
+    padding: 15px 40px;
+    color: var(--text-secondary);
+}
+div.breadcrumbs a {
+    color: var(--text-secondary);
+}
+ div.breadcrumbs a:hover {
+    color: #fff;
 }
