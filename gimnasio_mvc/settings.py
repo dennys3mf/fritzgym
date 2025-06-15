@@ -13,11 +13,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-una-llave-secreta-de-
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 # Dominios permitidos para la aplicación
-ALLOWED_HOSTS = []
-HEROKU_APP_NAME = os.environ.get('HEROKU_APP_NAME')
-if HEROKU_APP_NAME:
-    ALLOWED_HOSTS.append(f'{HEROKU_APP_NAME}.herokuapp.com')
-ALLOWED_HOSTS.append('127.0.0.1')
+HEROKU_HOSTNAME = 'shrouded-atoll-93064-9488e26cb153.herokuapp.com'
+
+ALLOWED_HOSTS = [
+    HEROKU_HOSTNAME,
+    '127.0.0.1', # Para desarrollo local
+]
 
 # Application definition
 INSTALLED_APPS = [
