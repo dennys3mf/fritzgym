@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Máquinas - Fritz Gym{% endblock %}
+
+{% block style %}
+<style>
+    .maquina {
+        background-color: var(--color-superficie);
+        border-radius: 4px; /* Bordes más duros */
+        padding: 25px;
+        margin-bottom: 30px;
+        border: 1px solid #444;
+        border-left: 6px solid var(--color-primario);
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    .maquina:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+    .video-responsive { position: relative; overflow: hidden; padding-top: 56.25%; border-radius: 4px; margin-top: 20px; }
+    .video-responsive iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+</style>
+{% endblock %}
+
+{% block content %}
+    <h1>Tutoriales de Máquinas - Fritz Gym</h1>
+
+    {% for maquina in maquinas_list %}
+        <section class="maquina" id="maquina-{{ maquina.id }}">
+            <h2>{{ maquina.nombre }}</h2>
+            <p>{{ maquina.descripcion|linebreaks }}</p>
+
+            <div class="video-responsive">
+                <iframe
+                    src="{{ maquina.url_video }}"
+                    title="Video de {{ maquina.nombre }}"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+    {% empty %}
+        <p>Aún no se han añadido máquinas. ¡Vuelve pronto!</p>
+    {% endfor %}
+{% endblock %}

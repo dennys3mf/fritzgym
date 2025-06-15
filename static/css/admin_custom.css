@@ -1,0 +1,86 @@
+/* static/css/admin_custom.css (Versión con colores más suaves) */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap');
+
+:root {
+    /* --- NUEVA PALETA DE COLORES "VINTAGE" --- */
+    --primary: #c5a05a;        /* Un "oro viejo" en lugar de amarillo brillante */
+    --primary-hover: #d9b87c;  /* Un oro un poco más claro para el hover */
+    --bg-dark: #212529;         /* Un gris muy oscuro, casi negro, menos duro que el #000 */
+    --bg-surface: #343a40;      /* Un gris medio para las superficies de los módulos */
+    --text-color: #ced4da;      /* Un blanco roto, más suave que el blanco puro */
+    --border-color: #495057;   /* Un gris para los bordes */
+}
+
+body, #content {
+    background: var(--bg-dark);
+    color: var(--text-color);
+    font-family: 'Roboto', sans-serif;
+}
+
+/* --- Cabecera Principal --- */
+#header {
+    background: var(--bg-dark);
+    color: var(--primary);
+    border-bottom: 3px solid var(--primary);
+}
+#header a:link, #header a:visited {
+    color: var(--text-color);
+}
+#branding h1, #branding h1 a:link, #branding h1 a:visited {
+    color: var(--primary);
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+}
+
+/* --- Módulos y Tablas --- */
+.module {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+}
+.module caption, .module h2, .inline-group h2 {
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+}
+table {
+    background: var(--bg-dark);
+}
+tr:nth-child(odd), .row-form-errors {
+    background: #2a2e32; /* Un gris ligeramente diferente para las filas impares */
+}
+.form-row {
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* --- Enlaces y Botones --- */
+a:link, a:visited {
+    color: var(--primary);
+}
+a:hover {
+    color: var(--primary-hover);
+}
+.button, input[type=submit], input[type=button], .submit-row input, a.button {
+    background: var(--primary);
+    color: var(--bg-dark);
+    border: none;
+    border-radius: 4px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+}
+.button.default, input[type=submit].default, .submit-row input.default {
+    font-weight: 700 !important;
+}
+.button:hover, input[type=submit]:hover, input[type=button]:hover, .submit-row input:hover, a.button:hover {
+    background: var(--primary-hover);
+}
+
+/* --- Breadcrumbs (Migas de pan) --- */
+div.breadcrumbs {
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 40px;
+}
