@@ -16,8 +16,15 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 HEROKU_HOSTNAME = 'shrouded-atoll-93064-9488e26cb153.herokuapp.com'
 
 ALLOWED_HOSTS = [
-    HEROKU_HOSTNAME,
-    '127.0.0.1', # Para desarrollo local
+    # La URL de Heroku
+    'shrouded-atoll-93064-9488e26cb153.herokuapp.com',
+
+    # Nuestros nuevos dominios personalizados
+    'fritzgym.tech',
+    'www.fritzgym.tech',
+
+    # Para desarrollo local
+    '127.0.0.1',
 ]
 
 # Application definition
