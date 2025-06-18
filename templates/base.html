@@ -98,5 +98,13 @@ p {
         {% block content %}
         {% endblock %}
     </main>
+    <footer style="text-align: center; padding: 40px 20px; margin-top: 40px; border-top: 1px solid #333;">
+        <p>© {% now "Y" %} Fritz Gym - Todos los derechos reservados.</p>
+        <nav>
+            <a href="{% url 'sobre-nosotros' %}" style="margin: 0 10px;">Sobre Nosotros</a> |
+            <a href="{% url 'contacto' %}" style="margin: 0 10px;">Contacto</a> |
+            <a href="{% url 'privacidad' %}" style="margin: 0 10px;">Política de Privacidad</a>
+        </nav>
+    </footer>
 </body>
 </html>

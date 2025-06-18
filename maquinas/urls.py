@@ -6,5 +6,7 @@ urlpatterns = [
     path('', views.lista_maquinas, name='lista-maquinas'),
     path('maquina/<int:maquina_id>/', views.detalle_maquina, name='detalle-maquina'), # <-- AÑADE ESTA LÍNEA
     path('maquina/<int:maquina_id>/qr/', views.generar_qr, name='generar-qr'),
-
+    path('sobre-nosotros/', views.pagina_sobre_nosotros, name='sobre-nosotros'),
+    path('contacto/', views.pagina_contacto, name='contacto'),
+    path('privacidad/', views.pagina_privacidad, name='privacidad'),
 ]

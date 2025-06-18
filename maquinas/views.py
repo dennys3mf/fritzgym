@@ -43,3 +43,12 @@ def generar_qr(request, maquina_id):
 
     # 4. Devolvemos la imagen como una respuesta HTTP
     return HttpResponse(buffer, content_type='image/png')
+
+def pagina_sobre_nosotros(request):
+    return render(request, 'maquinas/sobre_nosotros.html')
+
+def pagina_contacto(request):
+    return render(request, 'maquinas/contacto.html')
+
+def pagina_privacidad(request):
+    return render(request, 'maquinas/privacidad.html')
