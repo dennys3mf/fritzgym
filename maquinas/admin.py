@@ -11,8 +11,10 @@ class MaquinaAdmin(admin.ModelAdmin):
     """
     Personalización del panel de administrador para el modelo Maquina.
     """
-    # Define las columnas que se mostrarán en la lista de máquinas
-    list_display = ('nombre', 'ver_codigo_qr')
+    # AÑADIMOS 'grupo_muscular' a las columnas a mostrar
+    list_display = ('nombre', 'grupo_muscular', 'ver_codigo_qr')
+    # AÑADIMOS un filtro por grupo muscular en la barra lateral
+    list_filter = ('grupo_muscular',)
 
     def ver_codigo_qr(self, obj):
         """

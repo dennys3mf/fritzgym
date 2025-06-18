@@ -19,11 +19,75 @@
     }
     .video-responsive { position: relative; overflow: hidden; padding-top: 56.25%; border-radius: 4px; margin-top: 20px; }
     .video-responsive iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .controles-busqueda {
+        background-color: var(--color-superficie);
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        border: 1px solid var(--border-color);
+    }
+    .formulario-busqueda {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .formulario-busqueda input {
+        flex-grow: 1;
+        padding: 10px;
+        border: 1px solid #555;
+        background-color: #333;
+        color: var(--color-texto);
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+    .formulario-busqueda button {
+        padding: 10px 20px;
+        border: none;
+        background-color: var(--color-primario);
+        color: #000;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        font-weight: 700;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .filtros-grupo {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .filtro-btn {
+        padding: 8px 15px;
+        background-color: #444;
+        color: var(--color-texto);
+        text-decoration: none;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        transition: background-color 0.2s;
+    }
+    .filtro-btn:hover {
+        background-color: var(--color-primario);
+        color: #000;
+    }     
 </style>
 {% endblock %}
 
 {% block content %}
-    <h1>Tutoriales de Máquinas - Fritz Gym</h1>
+    <h1>Tutoriales de Máquinas</h1>
+
+    <div class="controles-busqueda">
+        <form method="GET" action="{% url 'lista-maquinas' %}" class="formulario-busqueda">
+            <input type="text" name="q" placeholder="Buscar máquina por nombre..." value="{{ query_busqueda }}">
+            <button type="submit">Buscar</button>
+        </form>
+
+        <div class="filtros-grupo">
+            <a href="{% url 'lista-maquinas' %}" class="filtro-btn">Todos</a>
+            {% for valor, nombre in grupos_musculares %}
+                <a href="?grupo={{ valor }}" class="filtro-btn">{{ nombre }}</a>
+            {% endfor %}
+        </div>
+    </div>
 
     {% for maquina in maquinas_list %}
         <section class="maquina" id="maquina-{{ maquina.id }}">
