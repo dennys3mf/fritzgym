@@ -13,18 +13,16 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-una-llave-secreta-de-
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 # Dominios permitidos para la aplicación
-HEROKU_HOSTNAME = 'shrouded-atoll-93064-9488e26cb153.herokuapp.com'
+HEROKU_HOSTNAME = 'fritzgym.herokuapp.com'
 
 ALLOWED_HOSTS = [
-    # La URL de Heroku
+    'fritzgym.herokuapp.com',
     'shrouded-atoll-93064-9488e26cb153.herokuapp.com',
-
-    # Nuestros nuevos dominios personalizados
+    '.herokuapp.com',
     'fritzgym.tech',
     'www.fritzgym.tech',
-
-    # Para desarrollo local
     '127.0.0.1',
+    'localhost',
 ]
 
 # Application definition
