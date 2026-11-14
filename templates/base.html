@@ -4,134 +4,633 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Fritz Gym{% endblock %}</title>
-    <link rel="icon" type="image/svg" href="{% static 'images/logof.svg' %}"> <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>{% block title %}Fritz Gym - Old School Fitness Club{% endblock %}</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/logof.svg' %}">
+    
+    <!-- Google Fonts: Oswald (Headings/Brutalist) + Plus Jakarta Sans (Clean Modern UI) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1859590031797813"
-         crossorigin="anonymous"></script>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1859590031797813" crossorigin="anonymous"></script>
 
     <style>
         :root {
+            /* Paleta Oficial Fritz Gym x EBSH Style */
             --color-primario: #FFC300;
-            --color-fondo: #1a1a1a;
-            --color-texto: #E0E0E0;
-            --color-superficie: #2c2c2c;
+            --color-primario-glow: rgba(255, 195, 0, 0.25);
+            --color-primario-hover: #E5AE00;
+            
+            --bg-base: #0A0A0A;
+            --bg-surface: #141414;
+            --bg-surface-elevated: #1C1C1C;
+            --bg-surface-hover: #222222;
+            
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-medium: rgba(255, 255, 255, 0.15);
+            --border-accent: rgba(255, 195, 0, 0.4);
+            
+            --color-texto: #FFFFFF;
+            --color-texto-muted: #A0A0A0;
+            --color-texto-dim: #666666;
+
+            --font-display: 'Oswald', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            
+            --max-width: 1200px;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --radius-pill: 9999px;
+            
+            --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--color-fondo);
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23404040' stroke-width='1'%3E%3Cpath d='M-500 750c0 138 112 250 250 250s250-112 250-250-112-250-250-250-250 112-250 250z'/%3E%3Cpath d='M-500 250c0 138 112 250 250 250s250-112 250-250-112-250-250-250-250 112-250 250z'/%3E%3Cpath d='M0 0c0 138 112 250 250 250s250-112 250-250-112-250-250-250S0 112 0 250z'/%3E%3Cpath d='M500 0c0 138 112 250 250 250s250-112 250-250-112-250-250-250-250 112-250 250z'/%3E%3Cpath d='M-500-250c0 138 112 250 250 250s250-112 250-250-112-250-250-250-250 112-250 250z'/%3E%3Cpath d='M0-500c0 138 112 250 250 250s250-112 250-250-112-250-250-250-250 112-250 250z'/%3E%3Cpath d='M500-500c0 138 112 250 250 250s250-112 250-250-112-250-250-250-250 112-250 250z'/%3E%3Cpath d='M0 500c0 138 112 250 250 250s250-112 250-250-112-250-250-250S0 362 0 500z'/%3E%3Cpath d='M500 500c0 138 112 250 250 250s250-112 250-250-112-250-250-250-250 112-250 250z'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: 100px;
-            color: var(--color-texto);
+
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-base);
+            color: var(--color-texto);
+            line-height: 1.6;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
-        header {
-            padding: 40px 20px;
-            text-align: center;
+
+        /* --- Header & Navbar Flotante Glassmorphism (EBSH Style) --- */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.88);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+            transition: var(--transition-smooth);
+        }
+
+        .navbar-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--color-texto);
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-pill);
+            border: 2px solid var(--color-primario);
+            background: #000;
+            object-fit: cover;
+            box-shadow: 0 0 14px var(--color-primario-glow);
+            transition: transform 0.3s ease;
+        }
+
+        .brand-link:hover .brand-logo {
+            transform: scale(1.06);
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-title {
+            font-family: var(--font-display);
+            font-size: 1.45rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            line-height: 1.1;
+        }
+
+        .brand-title span {
+            color: var(--color-primario);
+        }
+
+        .brand-tagline {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--color-primario);
+            opacity: 0.9;
+        }
+
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--color-texto-muted);
+            font-family: var(--font-display);
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             position: relative;
-            background-image: url("{% static 'images/gym_banner.jpg' %}");
-            background-size: cover;
-            background-position: center;
-            border-bottom: 5px solid var(--color-primario);
+            padding: 6px 0;
+            transition: color 0.2s ease;
         }
-        header::before {
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #FFFFFF;
+        }
+
+        .nav-link.active::after,
+        .nav-link:hover::after {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.6);
-            z-index: 1;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-primario);
+            box-shadow: 0 0 8px var(--color-primario);
         }
-        header img {
-            max-width: 150px;
-            height: auto;
-            position: relative;
-            z-index: 2;
-            border: 4px solid var(--color-primario);
-            border-radius: 50%;
-            background: black;
-            box-shadow: 0 0 15px var(--color-primario);
+
+        /* Header Actions */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
-        main {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 20px;
-            flex-grow: 1; /* Hace que el contenido principal ocupe el espacio disponible */
-        }
-        h1, h2, h3 {
-            font-family: 'Oswald', sans-serif;
-            color: var(--color-primario);
+
+        .btn-cta-header {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: var(--color-primario);
+            color: #000000;
+            font-family: var(--font-display);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            text-decoration: none;
+            padding: 9px 18px;
+            border-radius: var(--radius-pill);
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 14px var(--color-primario-glow);
         }
-        p {
-            line-height: 1.7;
+
+        .btn-cta-header:hover {
+            background-color: #FFFFFF;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
         }
-        footer {
-            text-align: center; 
-            padding: 40px 20px; 
-            margin-top: auto; /* Empuja el footer hacia abajo */
-            border-top: 1px solid #333;
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: #FFFFFF;
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 6px;
         }
-        footer a {
-            color: var(--color-texto);
-            margin: 0 10px;
+
+        /* Mobile Nav Drawer */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 73px;
+            left: 0;
+            width: 100%;
+            background: rgba(12, 12, 12, 0.98);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 24px 20px;
+            z-index: 999;
+            flex-direction: column;
+            gap: 18px;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
-        .boton-flotante {
-            position: fixed; /* ¡La clave! Se queda fijo en la pantalla */
-            left: 20px; /* Distancia desde la izquierda */
-            top: 50%; /* Lo posiciona en la mitad vertical de la pantalla */
-            transform: translateY(-50%); /* Lo centra verticalmente a la perfección */
-            background-color: #1877F2; /* Color oficial de Facebook */
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%; /* Lo hace redondo */
+
+        .mobile-nav.open {
+            display: flex;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-nav .nav-link {
+            font-size: 1.15rem;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- Main Content Area --- */
+        main {
+            flex: 1;
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 30px 20px 60px;
+        }
+
+        /* Typography Defaults */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #FFFFFF;
+        }
+
+        /* --- Footer (EBSH Athletic Industrial) --- */
+        .site-footer {
+            margin-top: auto;
+            background-color: #070707;
+            border-top: 1px solid var(--border-subtle);
+            padding: 60px 20px 30px;
+            position: relative;
+        }
+
+        .footer-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .footer-brand .brand-title {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            color: var(--color-texto-muted);
+            font-size: 0.92rem;
+            max-width: 420px;
+            margin-bottom: 20px;
+        }
+
+        .footer-social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-circle-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-pill);
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            color: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 1.1rem;
             text-decoration: none;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-            z-index: 1000; /* Se asegura de que esté por encima de otro contenido */
-            transition: transform 0.2s ease-in-out;
+            transition: var(--transition-smooth);
         }
 
-        .boton-flotante:hover {
-            transform: translateY(-50%) scale(1.1); /* Efecto de crecimiento al pasar el mouse */
+        .social-circle-btn:hover {
+            background-color: var(--color-primario);
+            color: #000000;
+            border-color: var(--color-primario);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px var(--color-primario-glow);
         }
-        /* Bloque para que las páginas hijo añadan sus propios estilos */
+
+        .footer-heading {
+            font-size: 1.1rem;
+            color: var(--color-primario);
+            margin-bottom: 18px;
+            letter-spacing: 2px;
+        }
+
+        .footer-links-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links-list a {
+            color: var(--color-texto-muted);
+            text-decoration: none;
+            font-size: 0.92rem;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links-list a:hover {
+            color: var(--color-primario);
+        }
+
+        .footer-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: var(--color-texto-muted);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+        }
+
+        .footer-info-item i {
+            color: var(--color-primario);
+            margin-top: 4px;
+        }
+
+        .footer-bottom {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            color: var(--color-texto-dim);
+            font-size: 0.82rem;
+        }
+
+        .footer-bottom a {
+            color: var(--color-texto-dim);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--color-primario);
+        }
+
+        /* Botón flotante Facebook / WhatsApp */
+        .boton-flotante-social {
+            position: fixed;
+            right: 20px;
+            bottom: 30px;
+            background-color: var(--color-primario);
+            color: #000000;
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-pill);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--color-primario-glow);
+            z-index: 1000;
+            transition: var(--transition-smooth);
+        }
+
+        .boton-flotante-social:hover {
+            background-color: #FFFFFF;
+            transform: scale(1.1) translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.25);
+        }
+
+        /* Mobile Bottom App Navigation Bar */
+        .mobile-bottom-bar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border-subtle);
+            z-index: 999;
+            padding: 8px 10px;
+            justify-content: space-around;
+        }
+
+        .mobile-bar-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: var(--color-texto-muted);
+            font-size: 0.72rem;
+            font-family: var(--font-display);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            transition: color 0.2s;
+        }
+
+        .mobile-bar-item i {
+            font-size: 1.15rem;
+        }
+
+        .mobile-bar-item.active,
+        .mobile-bar-item:hover {
+            color: var(--color-primario);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 900px) {
+            .nav-links, .header-actions {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .mobile-bottom-bar {
+                display: flex;
+            }
+            body {
+                padding-bottom: 60px; /* Space for bottom bar */
+            }
+            .boton-flotante-social {
+                bottom: 80px; /* Above bottom bar */
+            }
+        }
+
+        /* Custom Styles Injected by Child Views */
         {% block style %}{% endblock %}
-
     </style>
 </head>
 <body>
-    <a href="https://www.facebook.com/profile.php?id=100064036540525" class="boton-flotante" target="_blank" title="Síguenos en Facebook">
-        <i class="fab fa-facebook-f"></i>
-    </a>
-    <header>
-        <img src="{% static 'images/logofritzfym.jpg' %}" alt="Logo Fritz Gym">
+
+    <!-- Header / Navbar Sticky -->
+    <header class="site-header">
+        <div class="navbar-container">
+            <!-- Brand -->
+            <a href="{% url 'lista-maquinas' %}" class="brand-link">
+                <img src="{% static 'images/logofritzfym.jpg' %}" alt="Logo Fritz Gym" class="brand-logo">
+                <div class="brand-text">
+                    <span class="brand-title">FRITZ <span>GYM</span></span>
+                    <span class="brand-tagline">Old School Fitness</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <ul class="nav-links">
+                <li><a href="{% url 'lista-maquinas' %}" class="nav-link {% if request.resolver_match.url_name == 'lista-maquinas' %}active{% endif %}">Máquinas</a></li>
+                <li><a href="{% url 'contacto' %}" class="nav-link {% if request.resolver_match.url_name == 'contacto' %}active{% endif %}">Sede & Horarios</a></li>
+                <li><a href="{% url 'sobre-nosotros' %}" class="nav-link {% if request.resolver_match.url_name == 'sobre-nosotros' %}active{% endif %}">Sobre Nosotros</a></li>
+                <li><a href="{% url 'privacidad' %}" class="nav-link {% if request.resolver_match.url_name == 'privacidad' %}active{% endif %}">Privacidad</a></li>
+            </ul>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <a href="{% url 'contacto' %}" class="btn-cta-header">
+                    <i class="fa-solid fa-location-dot"></i> Ver Sede
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir menú">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <nav class="mobile-nav" id="mobileNav">
+            <a href="{% url 'lista-maquinas' %}" class="nav-link">🏋️ Catálogo de Máquinas</a>
+            <a href="{% url 'contacto' %}" class="nav-link">📍 Sede Socabaya & Horarios</a>
+            <a href="{% url 'sobre-nosotros' %}" class="nav-link">⚡ Sobre Fritz Gym</a>
+            <a href="{% url 'privacidad' %}" class="nav-link">🔒 Política de Privacidad</a>
+            <a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" class="btn-cta-header" style="justify-content: center; margin-top: 10px;">
+                <i class="fa-brands fa-facebook"></i> Facebook Oficial
+            </a>
+        </nav>
     </header>
 
+    <!-- Main Content Container -->
     <main>
         {% block content %}
         {% endblock %}
     </main>
-    
-    <footer>
-        <p>© {% now "Y" %} Fritz Gym - Todos los derechos reservados.</p>
-        <nav>
-            <a href="{% url 'sobre-nosotros' %}">Sobre Nosotros</a> |
-            <a href="{% url 'contacto' %}">Contacto</a> |
-            <a href="{% url 'privacidad' %}">Política de Privacidad</a>
-        </nav>
+
+    <!-- Floating Social Button -->
+    <a href="https://www.facebook.com/profile.php?id=100064036540525" class="boton-flotante-social" target="_blank" rel="noopener noreferrer" title="Visita nuestro Facebook">
+        <i class="fa-brands fa-facebook-f"></i>
+    </a>
+
+    <!-- Mobile Bottom App Bar -->
+    <nav class="mobile-bottom-bar">
+        <a href="{% url 'lista-maquinas' %}" class="mobile-bar-item {% if request.resolver_match.url_name == 'lista-maquinas' and not request.GET.q %}active{% endif %}">
+            <i class="fa-solid fa-dumbbell"></i>
+            <span>Máquinas</span>
+        </a>
+        <a href="{% url 'lista-maquinas' %}#buscador" class="mobile-bar-item">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Buscar</span>
+        </a>
+        <a href="{% url 'contacto' %}" class="mobile-bar-item {% if request.resolver_match.url_name == 'contacto' %}active{% endif %}">
+            <i class="fa-solid fa-clock"></i>
+            <span>Horarios</span>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" class="mobile-bar-item">
+            <i class="fa-brands fa-facebook-messenger"></i>
+            <span>Mensaje</span>
+        </a>
+    </nav>
+
+    <!-- Modern Athletic Footer (EBSH style) -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div class="brand-title">FRITZ <span>GYM</span></div>
+                <p>Centro de acondicionamiento físico, fuerza y biomecánica en Arequipa. Filosofía <strong>Old School</strong>: entrenamiento auténtico, técnica estricta y resultados reales sin excusas.</p>
+                <div class="footer-social-links">
+                    <a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" class="social-circle-btn" title="Facebook">
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+                    <a href="https://maps.google.com/?q=Avenida+Socabaya+327+Socabaya+Arequipa" target="_blank" class="social-circle-btn" title="Google Maps">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="footer-heading">Navegación</h4>
+                <ul class="footer-links-list">
+                    <li><a href="{% url 'lista-maquinas' %}">Catálogo de Máquinas</a></li>
+                    <li><a href="{% url 'contacto' %}">Sede & Horarios de Atención</a></li>
+                    <li><a href="{% url 'sobre-nosotros' %}">Sobre Fritz Gym</a></li>
+                    <li><a href="{% url 'privacidad' %}">Política de Privacidad</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="footer-heading">Sede Socabaya</h4>
+                <div class="footer-info-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Av. Socabaya 327, Socabaya, Arequipa 04012</span>
+                </div>
+                <div class="footer-info-item">
+                    <i class="fa-solid fa-clock"></i>
+                    <span>Lun a Vie: 5:00 AM - 10:00 PM<br>Sáb: 6:00 AM - 5:00 PM<br>Dom: 7:00 AM - 1:00 PM</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>© {% now "Y" %} Fritz Gym. Todos los derechos reservados.</div>
+            <div>
+                <a href="{% url 'privacidad' %}">Privacidad & Términos</a>
+            </div>
+        </div>
     </footer>
 
+    <!-- Simple JS for Mobile Drawer -->
+    <script>
+        const toggleBtn = document.getElementById('mobileMenuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        
+        if (toggleBtn && mobileNav) {
+            toggleBtn.addEventListener('click', () => {
+                mobileNav.classList.toggle('open');
+                const icon = toggleBtn.querySelector('i');
+                if (mobileNav.classList.contains('open')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                } else {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        }
+    </script>
 </body>
 </html>

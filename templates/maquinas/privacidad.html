@@ -2,90 +2,105 @@
 
 {% block title %}Política de Privacidad - Fritz Gym{% endblock %}
 
+{% block style %}
+<style>
+    .privacy-container {
+        max-width: 860px;
+        margin: 0 auto;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        padding: 35px;
+    }
+
+    .privacy-header {
+        border-bottom: 1px solid var(--border-subtle);
+        padding-bottom: 20px;
+        margin-bottom: 25px;
+    }
+
+    .privacy-title {
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+    }
+
+    .privacy-date {
+        color: var(--color-primario);
+        font-family: var(--font-display);
+        font-size: 0.9rem;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+    }
+
+    .privacy-content h3 {
+        color: var(--color-primario);
+        font-size: 1.3rem;
+        margin-top: 25px;
+        margin-bottom: 12px;
+    }
+
+    .privacy-content p {
+        color: var(--color-texto-muted);
+        font-size: 0.95rem;
+        margin-bottom: 14px;
+        line-height: 1.8;
+    }
+
+    .privacy-content ul {
+        margin-left: 20px;
+        margin-bottom: 18px;
+        color: var(--color-texto-muted);
+        font-size: 0.95rem;
+    }
+
+    .privacy-content li {
+        margin-bottom: 10px;
+        line-height: 1.7;
+    }
+
+    .privacy-content a {
+        color: var(--color-primario);
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}
+
 {% block content %}
-<div style="background-color: var(--color-superficie); padding: 25px; border-radius: 8px;">
-    <h1>Política de Privacidad</h1>
-    <p>
-        <strong>Última actualización:</strong> 17 de Junio de 2025
-    </p>
-    <p>
-        En Fritz Gym, la privacidad de nuestros visitantes es de suma importancia para nosotros. Este documento de
-        política de privacidad describe los tipos de información personal que se reciben y recopilan y cómo se utilizan.
-    </p>
+<div class="privacy-container">
+    <div class="privacy-header">
+        <h1 class="privacy-title">Política de Privacidad</h1>
+        <div class="privacy-date">Fritz Gym · Actualizado: {% now "Y" %}</div>
+    </div>
 
-    <h3>1. Compromiso con la Privacidad</h3>
-    <p>
-        Nos comprometemos a proteger la privacidad de todos nuestros visitantes. Esta política se aplica al sitio web
-        fritzgym.tech y a todos los servicios ofrecidos a través de él.
-    </p>
+    <div class="privacy-content">
+        <p>
+            En Fritz Gym, la privacidad y confianza de nuestros visitantes y atletas es primordial. Este documento detalla cómo se maneja la información técnica y de navegación en nuestra plataforma web.
+        </p>
 
-    <h3>2. Información que Recopilamos</h3>
-    <p>
-        Nuestro sitio web puede recopilar información de forma automática a través de tecnologías como cookies,
-        principalmente para el funcionamiento de servicios de terceros.
-    </p>
-    <ul>
-        <li>
-            <strong>Datos de Navegación y Cookies:</strong> Al igual que muchos otros sitios web, utilizamos cookies
-            para mejorar la experiencia del usuario. Las cookies son pequeños archivos de datos que se almacenan en su
-            navegador. Utilizamos cookies para entender y guardar sus preferencias para futuras visitas y para recopilar
-            datos agregados sobre el tráfico del sitio y la interacción del sitio para que podamos ofrecer mejores
-            experiencias.
-        </li>
-    </ul>
+        <h3>1. Alcance</h3>
+        <p>
+            Esta política rige el sitio web informativo y de códigos QR de Fritz Gym en relación a los servicios y catálogos de máquinas brindados en nuestra sede de Socabaya, Arequipa.
+        </p>
 
-    <h3>3. Servicios de Terceros y Publicidad (Google AdSense)</h3>
-    <p>
-        Utilizamos Google AdSense, un servicio de publicidad de Google Inc., para mostrar anuncios en nuestro sitio web.
-    </p>
-    <ul>
-        <li>
-            Google, como proveedor de terceros, utiliza cookies (como la cookie de DoubleClick) para publicar anuncios
-            basados en las visitas anteriores de un usuario a nuestro sitio web o a otros sitios web.
-        </li>
-        <li>
-            El uso de cookies de publicidad permite a Google y a sus socios mostrar anuncios relevantes a nuestros
-            usuarios.
-        </li>
-        <li>
-            Usted puede inhabilitar la publicidad personalizada visitando la <a
-                href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Configuración de
-                anuncios de Google</a>. Para más información sobre cómo Google utiliza los datos, por favor visite su <a
-                href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de
-                Privacidad</a>.
-        </li>
-    </ul>
+        <h3>2. Datos de Navegación y Cookies</h3>
+        <p>
+            Utilizamos tecnologías estándar como cookies y almacenamiento local de navegador (LocalStorage) para mejorar la velocidad de carga de los videos tutoriales, recordar preferencias de visualización y almacenar temporalmente el temporizador de descanso sin recopilar datos personales identificables.
+        </p>
 
-    <h3>4. Derechos del Usuario</h3>
-    <p>
-        De conformidad con la **Ley N° 29733 - Ley de Protección de Datos Personales** y su Reglamento, vigente en Perú,
-        usted tiene derecho a ejercer sus derechos de Acceso, Rectificación, Cancelación y Oposición (derechos ARCO)
-        sobre sus datos personales.
-    </p>
-    <p>
-        Dado que nuestro sitio no almacena datos personales de identificación directa, estos derechos se ejercen
-        principalmente a través de las herramientas de gestión de consentimiento y configuración de privacidad de los
-        servicios de terceros que utilizamos, como Google.
-    </p>
+        <h3>3. Publicidad y Servicios Externos (Google AdSense)</h3>
+        <p>
+            Podemos emplear servicios de terceros, tales como Google AdSense o reproductores integrados de YouTube, los cuales pueden emplear cookies con propósitos de análisis y personalización. Para mayor detalle acerca de cómo Google administra la información, puedes consultar su <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidad</a> o la <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Configuración de Anuncios de Google</a>.
+        </p>
 
-    <h3>5. Seguridad de los Datos</h3>
-    <p>
-        Tomamos medidas razonables para proteger la información contra el acceso no autorizado, la alteración, la
-        divulgación o la destrucción. Sin embargo, ningún método de transmisión por Internet o de almacenamiento
-        electrónico es 100% seguro.
-    </p>
+        <h3>4. Marco Legal</h3>
+        <p>
+            De conformidad con la <strong>Ley N° 29733 - Ley de Protección de Datos Personales de la República del Perú</strong>, respetamos y garantizamos la seguridad de la información. Al tratarse de un sitio con acceso libre a tutoriales técnicos sin registro obligatorio de contraseñas, no retenemos historiales crediticios ni información bancaria en este servidor.
+        </p>
 
-    <h3>6. Cambios en esta Política de Privacidad</h3>
-    <p>
-        Nos reservamos el derecho de actualizar o cambiar nuestra política de privacidad en cualquier momento. Se
-        notificarán los cambios en esta página y se actualizará la fecha de "última actualización" en la parte superior
-        de esta política.
-    </p>
-
-    <h3>7. Contacto</h3>
-    <p>
-        Si tiene alguna pregunta sobre esta Política de Privacidad, puede contactarnos a través de la información
-        proporcionada en nuestra página de Contacto.
-    </p>
+        <h3>5. Contacto</h3>
+        <p>
+            Para cualquier consulta sobre esta política, puedes visitarnos presencialmente en nuestra sede de Avenida Socabaya 327, Socabaya, Arequipa, o comunicarte a través de nuestros canales oficiales.
+        </p>
+    </div>
 </div>
 {% endblock %}

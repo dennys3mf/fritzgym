@@ -1,109 +1,591 @@
 {% extends 'base.html' %}
 
-{% block title %}Fritz Gym{% endblock %}
+{% block title %}Tutoriales & Biomecánica de Máquinas - Fritz Gym{% endblock %}
 
 {% block style %}
 <style>
-    .maquina {
-        background-color: var(--color-superficie);
-        border-radius: 4px; /* Bordes más duros */
-        padding: 25px;
-        margin-bottom: 30px;
-        border: 1px solid #444;
-        border-left: 6px solid var(--color-primario);
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    /* --- Hero Section (EBSH Sports Hub Style) --- */
+    .hero-catalog {
+        padding: 40px 0 30px;
+        border-bottom: 1px solid var(--border-subtle);
+        margin-bottom: 35px;
     }
-    .maquina:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+
+    .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(255, 195, 0, 0.1);
+        border: 1px solid var(--border-accent);
+        color: var(--color-primario);
+        font-family: var(--font-display);
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border-radius: var(--radius-pill);
+        margin-bottom: 18px;
     }
-    .video-responsive { position: relative; overflow: hidden; padding-top: 56.25%; border-radius: 4px; margin-top: 20px; }
-    .video-responsive iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-    .controles-busqueda {
-        background-color: var(--color-superficie);
-        padding: 20px;
-        border-radius: 8px;
-        margin-bottom: 30px;
-        border: 1px solid var(--border-color);
+
+    .hero-tag .pulse-dot {
+        width: 8px;
+        height: 8px;
+        background-color: var(--color-primario);
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--color-primario);
     }
-    .formulario-busqueda {
+
+    .hero-title {
+        font-size: clamp(2rem, 5vw, 3.4rem);
+        line-height: 1.05;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        margin-bottom: 15px;
+    }
+
+    .hero-title span {
+        color: var(--color-primario);
+    }
+
+    .hero-subtitle {
+        color: var(--color-texto-muted);
+        font-size: 1.05rem;
+        max-width: 680px;
+        margin-bottom: 25px;
+    }
+
+    .hero-stats-row {
         display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding-top: 10px;
     }
-    .formulario-busqueda input {
-        flex-grow: 1;
-        padding: 10px;
-        border: 1px solid #555;
-        background-color: #333;
+
+    .stat-chip {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        padding: 10px 18px;
+        border-radius: var(--radius-sm);
+        font-size: 0.88rem;
         color: var(--color-texto);
-        border-radius: 4px;
+    }
+
+    .stat-chip i {
+        color: var(--color-primario);
         font-size: 1rem;
     }
-    .formulario-busqueda button {
-        padding: 10px 20px;
-        border: none;
-        background-color: var(--color-primario);
-        color: #000;
-        font-family: 'Oswald', sans-serif;
-        text-transform: uppercase;
-        font-weight: 700;
-        border-radius: 4px;
-        cursor: pointer;
+
+    /* --- Anuncios Promocionales --- */
+    .anuncios-container {
+        margin-bottom: 35px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
     }
-    .filtros-grupo {
+
+    .anuncio-card {
+        background: linear-gradient(135deg, #1C1C1C 0%, #121212 100%);
+        border: 1px solid var(--border-accent);
+        border-left: 6px solid var(--color-primario);
+        padding: 24px;
+        border-radius: var(--radius-md);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .anuncio-title {
+        font-size: 1.4rem;
+        color: var(--color-primario);
+    }
+
+    .anuncio-content {
+        color: var(--color-texto-muted);
+        font-size: 0.95rem;
+    }
+
+    .anuncio-link {
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #000;
+        background: var(--color-primario);
+        padding: 8px 18px;
+        border-radius: var(--radius-pill);
+        font-family: var(--font-display);
+        font-size: 0.85rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: var(--transition-smooth);
+    }
+
+    .anuncio-link:hover {
+        background: #FFFFFF;
+    }
+
+    /* --- Controles de Búsqueda y Filtros (EBSH Minimalist) --- */
+    .catalog-controls {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        padding: 24px;
+        border-radius: var(--radius-lg);
+        margin-bottom: 40px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .search-box {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 22px;
+    }
+
+    .search-input-wrapper {
+        position: relative;
+        flex: 1;
+    }
+
+    .search-input-wrapper i {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--color-texto-dim);
+        font-size: 1rem;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 14px 16px 14px 44px;
+        background: #0A0A0A;
+        border: 1px solid var(--border-medium);
+        border-radius: var(--radius-sm);
+        color: #FFFFFF;
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        transition: var(--transition-smooth);
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: var(--color-primario);
+        box-shadow: 0 0 14px var(--color-primario-glow);
+    }
+
+    .btn-search {
+        padding: 0 26px;
+        background: var(--color-primario);
+        color: #000000;
+        border: none;
+        border-radius: var(--radius-sm);
+        font-family: var(--font-display);
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: var(--transition-smooth);
+    }
+
+    .btn-search:hover {
+        background: #FFFFFF;
+    }
+
+    .filters-headline {
+        font-size: 0.8rem;
+        color: var(--color-texto-dim);
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
+
+    .filters-wrapper {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
     }
-    .filtro-btn {
-        padding: 8px 15px;
-        background-color: #444;
-        color: var(--color-texto);
+
+    .filter-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 18px;
+        background: #0D0D0D;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-pill);
+        color: var(--color-texto-muted);
         text-decoration: none;
-        border-radius: 20px;
-        font-size: 0.9rem;
-        transition: background-color 0.2s;
+        font-family: var(--font-display);
+        font-size: 0.85rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: var(--transition-smooth);
     }
-    .filtro-btn:hover {
-        background-color: var(--color-primario);
+
+    .filter-chip:hover {
+        background: var(--bg-surface-elevated);
+        border-color: var(--color-primario);
+        color: #FFFFFF;
+        transform: translateY(-2px);
+    }
+
+    .filter-chip.active {
+        background: var(--color-primario);
+        border-color: var(--color-primario);
+        color: #000000;
+        font-weight: 700;
+        box-shadow: 0 4px 15px var(--color-primario-glow);
+    }
+
+    /* --- Machine Cards Grid --- */
+    .machines-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+        gap: 28px;
+    }
+
+    .machine-card {
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        transition: var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .machine-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: transparent;
+        transition: background 0.3s ease;
+    }
+
+    .machine-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--border-accent);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 195, 0, 0.08);
+    }
+
+    .machine-card:hover::before {
+        background: var(--color-primario);
+    }
+
+    .card-top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    .badge-muscle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(255, 195, 0, 0.12);
+        color: var(--color-primario);
+        border: 1px solid var(--border-accent);
+        font-family: var(--font-display);
+        font-size: 0.76rem;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: var(--radius-pill);
+    }
+
+    .machine-number {
+        font-family: var(--font-display);
+        font-size: 0.82rem;
+        color: var(--color-texto-dim);
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .machine-title {
+        font-size: 1.45rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        line-height: 1.2;
+    }
+
+    .machine-desc {
+        color: var(--color-texto-muted);
+        font-size: 0.92rem;
+        margin-bottom: 18px;
+        flex-grow: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .video-frame-container {
+        position: relative;
+        overflow: hidden;
+        padding-top: 56.25%; /* 16:9 ratio */
+        border-radius: var(--radius-md);
+        background: #000000;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        margin-bottom: 18px;
+    }
+
+    .video-frame-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    .card-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding-top: 14px;
+        border-top: 1px solid var(--border-subtle);
+    }
+
+    .btn-detail {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--color-primario);
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-size: 0.9rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: color 0.2s ease;
+    }
+
+    .btn-detail:hover {
+        color: #FFFFFF;
+    }
+
+    .btn-qr-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--bg-surface-elevated);
+        border: 1px solid var(--border-subtle);
+        color: var(--color-texto-muted);
+        padding: 6px 14px;
+        border-radius: var(--radius-pill);
+        font-family: var(--font-display);
+        font-size: 0.78rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
+        transition: var(--transition-smooth);
+    }
+
+    .btn-qr-pill:hover {
+        background: var(--color-primario);
         color: #000;
-    }     
+        border-color: var(--color-primario);
+    }
+
+    /* Estado Vacío */
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg);
+        grid-column: 1 / -1;
+    }
+
+    .empty-state i {
+        font-size: 3rem;
+        color: var(--color-primario);
+        margin-bottom: 18px;
+    }
+
+    .empty-state h3 {
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+    }
+
+    .empty-state p {
+        color: var(--color-texto-muted);
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .machines-grid {
+            grid-template-columns: 1fr;
+        }
+        .hero-catalog {
+            padding: 20px 0;
+        }
+        .search-box {
+            flex-direction: column;
+        }
+        .btn-search {
+            padding: 12px;
+            justify-content: center;
+        }
+    }
 </style>
 {% endblock %}
 
 {% block content %}
-    <h1>Tutoriales de Máquinas</h1>
+    <!-- Hero Section -->
+    <section class="hero-catalog">
+        <div class="hero-tag">
+            <span class="pulse-dot"></span>
+            SEDE SOCABAYA · AREQUIPA
+        </div>
+        <h1 class="hero-title">TUTORIALES & <span>BIOMECÁNICA</span></h1>
+        <p class="hero-subtitle">
+            Aprende la técnica estricta y correcta de cada máquina en sala. Escanea el código QR adherido a cada equipo o filtra por grupo muscular para potenciar tu entrenamiento.
+        </p>
 
-    <div class="controles-busqueda">
-        <form method="GET" action="{% url 'lista-maquinas' %}" class="formulario-busqueda">
-            <input type="text" name="q" placeholder="Buscar máquina por nombre..." value="{{ query_busqueda }}">
-            <button type="submit">Buscar</button>
+        <div class="hero-stats-row">
+            <div class="stat-chip">
+                <i class="fa-solid fa-dumbbell"></i>
+                <span><strong>{{ maquinas_list|length }}</strong> Máquinas Registradas</span>
+            </div>
+            <div class="stat-chip">
+                <i class="fa-brands fa-youtube"></i>
+                <span>Videos Técnicos HD</span>
+            </div>
+            <div class="stat-chip">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>Acceso Directo por QR</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Anuncios Activos -->
+    {% if anuncios_activos %}
+        <section class="anuncios-container">
+            {% for anuncio in anuncios_activos %}
+                <div class="anuncio-card">
+                    <h3 class="anuncio-title"><i class="fa-solid fa-bullhorn"></i> {{ anuncio.titulo }}</h3>
+                    <p class="anuncio-content">{{ anuncio.contenido|linebreaksbr }}</p>
+                    {% if anuncio.enlace_opcional %}
+                        <a href="{{ anuncio.enlace_opcional }}" target="_blank" class="anuncio-link">
+                            Más Información <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </section>
+    {% endif %}
+
+    <!-- Controles de Búsqueda y Filtros -->
+    <section class="catalog-controls" id="buscador">
+        <form method="GET" action="{% url 'lista-maquinas' %}" class="search-box">
+            <div class="search-input-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input 
+                    type="text" 
+                    name="q" 
+                    class="search-input" 
+                    placeholder="Buscar máquina (ej. femoral, polea, abductor...)" 
+                    value="{{ query_busqueda }}">
+            </div>
+            {% if request.GET.grupo %}
+                <input type="hidden" name="grupo" value="{{ request.GET.grupo }}">
+            {% endif %}
+            <button type="submit" class="btn-search">
+                <i class="fa-solid fa-search"></i> Buscar
+            </button>
         </form>
 
-        <div class="filtros-grupo">
-            <a href="{% url 'lista-maquinas' %}" class="filtro-btn">Todos</a>
-            {% for valor, nombre in grupos_musculares %}
-                <a href="?grupo={{ valor }}" class="filtro-btn">{{ nombre }}</a>
+        <div class="filters-headline">Filtrar por Grupo Muscular</div>
+        <div class="filters-wrapper">
+            <a href="{% url 'lista-maquinas' %}{% if query_busqueda %}?q={{ query_busqueda }}{% endif %}" 
+               class="filter-chip {% if not request.GET.grupo %}active{% endif %}">
+               <i class="fa-solid fa-grip"></i> Todos
+            </a>
+            
+            {% for codigo, nombre in grupos_musculares %}
+                <a href="?grupo={{ codigo }}{% if query_busqueda %}&q={{ query_busqueda }}{% endif %}" 
+                   class="filter-chip {% if request.GET.grupo == codigo %}active{% endif %}">
+                   {% if codigo == 'PE' %}<i class="fa-solid fa-shield-halved"></i>
+                   {% elif codigo == 'ES' %}<i class="fa-solid fa-person-running"></i>
+                   {% elif codigo == 'PI' %}<i class="fa-solid fa-bolt"></i>
+                   {% elif codigo == 'BR' %}<i class="fa-solid fa-hand-fist"></i>
+                   {% elif codigo == 'HO' %}<i class="fa-solid fa-arrows-up-to-line"></i>
+                   {% elif codigo == 'AB' %}<i class="fa-solid fa-square-check"></i>
+                   {% else %}<i class="fa-solid fa-circle-dot"></i>
+                   {% endif %}
+                   {{ nombre }}
+                </a>
             {% endfor %}
         </div>
-    </div>
+    </section>
 
-    {% for maquina in maquinas_list %}
-        <section class="maquina" id="maquina-{{ maquina.id }}">
-            <h2>{{ maquina.nombre }}</h2>
-            <p>{{ maquina.descripcion|linebreaks }}</p>
+    <!-- Grilla de Máquinas -->
+    <section class="machines-grid">
+        {% if maquinas_list %}
+            {% for maquina in maquinas_list %}
+                <article class="machine-card" id="maquina-{{ maquina.id }}">
+                    <div class="card-top-bar">
+                        <span class="badge-muscle">
+                            <i class="fa-solid fa-tag"></i> {{ maquina.get_grupo_muscular_display }}
+                        </span>
+                        <span class="machine-number">#{{ maquina.id }}</span>
+                    </div>
 
-            <div class="video-responsive">
-                <iframe
-                    src="{{ maquina.url_video }}"
-                    title="Video de {{ maquina.nombre }}"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
+                    <h2 class="machine-title">{{ maquina.nombre }}</h2>
+                    <div class="machine-desc">
+                        {{ maquina.descripcion|linebreaksbr }}
+                    </div>
+
+                    <div class="video-frame-container">
+                        <iframe
+                            src="{{ maquina.url_video }}"
+                            title="Video tutorial de {{ maquina.nombre }}"
+                            loading="lazy"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div class="card-actions">
+                        <a href="{% url 'detalle-maquina' maquina.id %}" class="btn-detail">
+                            Ver Técnica <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <a href="{% url 'generar-qr' maquina.id %}" target="_blank" class="btn-qr-pill" title="Ver código QR de esta máquina">
+                            <i class="fa-solid fa-qrcode"></i> QR
+                        </a>
+                    </div>
+                </article>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <h3>No se encontraron máquinas</h3>
+                <p>No hay máquinas que coincidan con los criterios de búsqueda actuales.</p>
+                <a href="{% url 'lista-maquinas' %}" class="btn-cta-header">
+                    <i class="fa-solid fa-arrow-rotate-left"></i> Restablecer Filtros
+                </a>
             </div>
-        </section>
-    {% empty %}
-        <p>Aún no se han añadido máquinas. ¡Vuelve pronto!</p>
-    {% endfor %}
+        {% endif %}
+    </section>
 {% endblock %}
