@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Fritz Gym - Old School Fitness Club{% endblock %}</title>
+    <title>{% block title %}Fritz Gym - Fitness & Workout Club{% endblock %}</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{% static 'images/logof.svg' %}">
     
-    <!-- Google Fonts: Oswald (Headings/Brutalist) + Plus Jakarta Sans (Clean Modern UI) -->
+    <!-- Google Fonts: Oswald (Headings/Brutalist) + Plus Jakarta Sans + Lato (Figma Reference Font) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -22,32 +22,34 @@
 
     <style>
         :root {
-            /* Paleta Oficial Fritz Gym x EBSH Style */
+            /* Paleta Oficial Fritz Gym x Figma Fitness App Tokens */
             --color-primario: #FFC300;
-            --color-primario-glow: rgba(255, 195, 0, 0.25);
+            --color-primario-glow: rgba(255, 195, 0, 0.28);
             --color-primario-hover: #E5AE00;
             
-            --bg-base: #0A0A0A;
-            --bg-surface: #141414;
-            --bg-surface-elevated: #1C1C1C;
-            --bg-surface-hover: #222222;
+            --bg-base: #0B0E11;
+            --bg-surface: #14181D;
+            --bg-surface-elevated: #1B2127;
+            --bg-surface-card: #181D23;
+            --bg-surface-hover: #222931;
             
-            --border-subtle: rgba(255, 255, 255, 0.08);
-            --border-medium: rgba(255, 255, 255, 0.15);
+            --border-subtle: rgba(255, 255, 255, 0.07);
+            --border-medium: rgba(255, 255, 255, 0.14);
             --border-accent: rgba(255, 195, 0, 0.4);
             
             --color-texto: #FFFFFF;
-            --color-texto-muted: #A0A0A0;
-            --color-texto-dim: #666666;
+            --color-texto-muted: #959CA6;
+            --color-texto-dim: #5E6571;
 
             --font-display: 'Oswald', sans-serif;
+            --font-ui: 'Lato', sans-serif;
             --font-body: 'Plus Jakarta Sans', sans-serif;
             
             --max-width: 1200px;
-            --radius-sm: 6px;
-            --radius-md: 10px;
-            --radius-lg: 16px;
-            --radius-pill: 9999px;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-capsule: 9999px;
             
             --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -74,12 +76,12 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- Header & Navbar Flotante Glassmorphism (EBSH Style) --- */
+        /* --- Header & Top Bar Glassmorphism --- */
         .site-header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(10, 10, 10, 0.88);
+            background: rgba(11, 14, 17, 0.88);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-subtle);
@@ -106,7 +108,7 @@
         .brand-logo {
             width: 44px;
             height: 44px;
-            border-radius: var(--radius-pill);
+            border-radius: var(--radius-capsule);
             border: 2px solid var(--color-primario);
             background: #000;
             object-fit: cover;
@@ -139,14 +141,14 @@
 
         .brand-tagline {
             font-size: 0.68rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             color: var(--color-primario);
-            opacity: 0.9;
+            opacity: 0.95;
         }
 
-        /* Navigation Links */
+        /* Navigation Links (Desktop) */
         .nav-links {
             display: flex;
             align-items: center;
@@ -157,10 +159,10 @@
         .nav-link {
             text-decoration: none;
             color: var(--color-texto-muted);
-            font-family: var(--font-display);
+            font-family: var(--font-ui);
             font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
+            font-weight: 700;
+            letter-spacing: 1px;
             text-transform: uppercase;
             position: relative;
             padding: 6px 0;
@@ -184,11 +186,11 @@
             box-shadow: 0 0 8px var(--color-primario);
         }
 
-        /* Header Actions */
+        /* Header CTA */
         .header-actions {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
 
         .btn-cta-header {
@@ -197,14 +199,14 @@
             gap: 8px;
             background-color: var(--color-primario);
             color: #000000;
-            font-family: var(--font-display);
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-family: var(--font-ui);
+            font-size: 0.88rem;
+            font-weight: 900;
+            letter-spacing: 0.5px;
             text-transform: uppercase;
             text-decoration: none;
-            padding: 9px 18px;
-            border-radius: var(--radius-pill);
+            padding: 10px 20px;
+            border-radius: var(--radius-capsule);
             transition: var(--transition-smooth);
             box-shadow: 0 4px 14px var(--color-primario-glow);
         }
@@ -233,13 +235,13 @@
             top: 73px;
             left: 0;
             width: 100%;
-            background: rgba(12, 12, 12, 0.98);
+            background: rgba(11, 14, 17, 0.98);
             backdrop-filter: blur(25px);
             border-bottom: 1px solid var(--border-subtle);
             padding: 24px 20px;
             z-index: 999;
             flex-direction: column;
-            gap: 18px;
+            gap: 16px;
             transform: translateY(-100%);
             opacity: 0;
             transition: transform 0.3s ease, opacity 0.3s ease;
@@ -263,7 +265,7 @@
             width: 100%;
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 30px 20px 60px;
+            padding: 28px 20px 80px;
         }
 
         /* Typography Defaults */
@@ -274,12 +276,99 @@
             color: #FFFFFF;
         }
 
-        /* --- Footer (EBSH Athletic Industrial) --- */
+        /* --- Floating Capsule Navigation Dock (Figma Reference Component) --- */
+        .figma-floating-dock-wrapper {
+            position: fixed;
+            bottom: 24px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .figma-floating-dock {
+            pointer-events: auto;
+            background: rgba(22, 27, 34, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: var(--radius-capsule);
+            padding: 7px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .dock-item {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border-radius: var(--radius-capsule);
+            text-decoration: none;
+            color: var(--color-texto-muted);
+            font-family: var(--font-ui);
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            transition: var(--transition-smooth);
+        }
+
+        .dock-item i {
+            font-size: 1.1rem;
+        }
+
+        .dock-item:hover {
+            color: #FFFFFF;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        /* Active Pill in Figma: Solid Accent Color with dark text */
+        .dock-item.active {
+            background-color: var(--color-primario);
+            color: #000000;
+            box-shadow: 0 4px 14px var(--color-primario-glow);
+        }
+
+        .dock-item.active i {
+            color: #000000;
+        }
+
+        /* Floating Social Button */
+        .boton-flotante-social {
+            position: fixed;
+            right: 24px;
+            bottom: 30px;
+            background-color: var(--color-primario);
+            color: #000000;
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-capsule);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--color-primario-glow);
+            z-index: 999;
+            transition: var(--transition-smooth);
+        }
+
+        .boton-flotante-social:hover {
+            background-color: #FFFFFF;
+            transform: scale(1.1) translateY(-2px);
+        }
+
+        /* --- Footer --- */
         .site-footer {
             margin-top: auto;
-            background-color: #070707;
+            background-color: #080A0D;
             border-top: 1px solid var(--border-subtle);
-            padding: 60px 20px 30px;
+            padding: 60px 20px 100px; /* Space for dock */
             position: relative;
         }
 
@@ -311,16 +400,16 @@
         }
 
         .social-circle-btn {
-            width: 42px;
-            height: 42px;
-            border-radius: var(--radius-pill);
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-capsule);
             background: var(--bg-surface);
             border: 1px solid var(--border-subtle);
             color: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-decoration: none;
             transition: var(--transition-smooth);
         }
@@ -329,7 +418,7 @@
             background-color: var(--color-primario);
             color: #000000;
             border-color: var(--color-primario);
-            transform: translateY(-3px);
+            transform: translateY(-2px);
             box-shadow: 0 6px 16px var(--color-primario-glow);
         }
 
@@ -395,72 +484,6 @@
             color: var(--color-primario);
         }
 
-        /* Botón flotante Facebook / WhatsApp */
-        .boton-flotante-social {
-            position: fixed;
-            right: 20px;
-            bottom: 30px;
-            background-color: var(--color-primario);
-            color: #000000;
-            width: 52px;
-            height: 52px;
-            border-radius: var(--radius-pill);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            text-decoration: none;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--color-primario-glow);
-            z-index: 1000;
-            transition: var(--transition-smooth);
-        }
-
-        .boton-flotante-social:hover {
-            background-color: #FFFFFF;
-            transform: scale(1.1) translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.25);
-        }
-
-        /* Mobile Bottom App Navigation Bar */
-        .mobile-bottom-bar {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid var(--border-subtle);
-            z-index: 999;
-            padding: 8px 10px;
-            justify-content: space-around;
-        }
-
-        .mobile-bar-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            text-decoration: none;
-            color: var(--color-texto-muted);
-            font-size: 0.72rem;
-            font-family: var(--font-display);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            padding: 6px 12px;
-            border-radius: var(--radius-sm);
-            transition: color 0.2s;
-        }
-
-        .mobile-bar-item i {
-            font-size: 1.15rem;
-        }
-
-        .mobile-bar-item.active,
-        .mobile-bar-item:hover {
-            color: var(--color-primario);
-        }
-
         /* Responsive Breakpoints */
         @media (max-width: 900px) {
             .nav-links, .header-actions {
@@ -473,14 +496,24 @@
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
-            .mobile-bottom-bar {
-                display: flex;
-            }
-            body {
-                padding-bottom: 60px; /* Space for bottom bar */
-            }
             .boton-flotante-social {
-                bottom: 80px; /* Above bottom bar */
+                display: none; /* Mobile uses dock */
+            }
+            .figma-floating-dock {
+                width: calc(100% - 32px);
+                max-width: 380px;
+                justify-content: space-between;
+            }
+            .dock-item {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+                flex: 1;
+            }
+            .dock-item span {
+                display: none;
+            }
+            .dock-item.active span {
+                display: inline;
             }
         }
 
@@ -513,7 +546,7 @@
             <!-- Header Actions -->
             <div class="header-actions">
                 <a href="{% url 'contacto' %}" class="btn-cta-header">
-                    <i class="fa-solid fa-location-dot"></i> Ver Sede
+                    <i class="fa-solid fa-location-dot"></i> Sede Socabaya
                 </a>
             </div>
 
@@ -541,32 +574,34 @@
         {% endblock %}
     </main>
 
-    <!-- Floating Social Button -->
+    <!-- Floating Social Button (Desktop) -->
     <a href="https://www.facebook.com/profile.php?id=100064036540525" class="boton-flotante-social" target="_blank" rel="noopener noreferrer" title="Visita nuestro Facebook">
         <i class="fa-brands fa-facebook-f"></i>
     </a>
 
-    <!-- Mobile Bottom App Bar -->
-    <nav class="mobile-bottom-bar">
-        <a href="{% url 'lista-maquinas' %}" class="mobile-bar-item {% if request.resolver_match.url_name == 'lista-maquinas' and not request.GET.q %}active{% endif %}">
-            <i class="fa-solid fa-dumbbell"></i>
-            <span>Máquinas</span>
-        </a>
-        <a href="{% url 'lista-maquinas' %}#buscador" class="mobile-bar-item">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <span>Buscar</span>
-        </a>
-        <a href="{% url 'contacto' %}" class="mobile-bar-item {% if request.resolver_match.url_name == 'contacto' %}active{% endif %}">
-            <i class="fa-solid fa-clock"></i>
-            <span>Horarios</span>
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" class="mobile-bar-item">
-            <i class="fa-brands fa-facebook-messenger"></i>
-            <span>Mensaje</span>
-        </a>
-    </nav>
+    <!-- Floating Capsule Navigation Dock (Figma Reference Component: Navigation Bar #88:929) -->
+    <div class="figma-floating-dock-wrapper">
+        <nav class="figma-floating-dock" aria-label="Navegación Rápida">
+            <a href="{% url 'lista-maquinas' %}" class="dock-item {% if request.resolver_match.url_name == 'lista-maquinas' and not request.GET.q %}active{% endif %}">
+                <i class="fa-solid fa-dumbbell"></i>
+                <span>Máquinas</span>
+            </a>
+            <a href="{% url 'lista-maquinas' %}#buscador" class="dock-item">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>Buscar</span>
+            </a>
+            <a href="{% url 'contacto' %}" class="dock-item {% if request.resolver_match.url_name == 'contacto' %}active{% endif %}">
+                <i class="fa-solid fa-clock"></i>
+                <span>Horarios</span>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" class="dock-item">
+                <i class="fa-brands fa-facebook-messenger"></i>
+                <span>Mensaje</span>
+            </a>
+        </nav>
+    </div>
 
-    <!-- Modern Athletic Footer (EBSH style) -->
+    <!-- Modern Athletic Footer -->
     <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-brand">
