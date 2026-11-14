@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e4ed46">
+  <meta name="description" content="Fritz Gym en Socabaya, Arequipa. Encuentra tu máquina, consulta su técnica en video y entrena con propósito.">
+  <title>{% block title %}Fritz Gym | Fuerza con propósito{% endblock %}</title>
+  <link rel="icon" href="{% static 'images/logof.svg' %}" type="image/svg+xml">
+  <link rel="preload" href="{% static 'fonts/anton.ttf' %}" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="{% static 'css/fritz.css' %}">
+  <script defer src="{% static 'js/fritz.js' %}"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1859590031797813" crossorigin="anonymous"></script>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="{% url 'lista-maquinas' %}" aria-label="Fritz Gym, inicio"><img class="original-logo" src="{% static 'images/logofritzfym.jpg' %}" alt="Fritz Gym, The Old School" width="64" height="64"></a>
+      <nav class="main-nav" id="mainNav" aria-label="Principal">
+        <a href="{% url 'lista-maquinas' %}#buscador" {% if request.resolver_match.url_name == 'lista-maquinas' or request.resolver_match.url_name == 'detalle-maquina' %}aria-current="page"{% endif %}>Máquinas</a>
+        <a href="{% url 'sobre-nosotros' %}" {% if request.resolver_match.url_name == 'sobre-nosotros' %}aria-current="page"{% endif %}>Nuestro gimnasio</a>
+        <a href="{% url 'contacto' %}" {% if request.resolver_match.url_name == 'contacto' %}aria-current="page"{% endif %}>Sede y horarios</a>
+      </nav>
+      <a class="button header-cta" href="{% url 'contacto' %}">Ven a entrenar <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav">Menú <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg></button>
+    </div>
+  </header>
+  <main id="contenido">{% block content %}{% endblock %}</main>
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <div><a class="wordmark" href="{% url 'lista-maquinas' %}"><img class="original-logo" src="{% static 'images/logofritzfym.jpg' %}" alt="Fritz Gym, The Old School" width="64" height="64"></a><p>La técnica primero.<br>El progreso, todos los días.</p></div>
+      <div><h2>Encuéntranos</h2><p>Av. Socabaya 327<br>Socabaya, Arequipa 04012</p><a href="https://maps.google.com/?q=Avenida+Socabaya+327+Socabaya+Arequipa" target="_blank" rel="noopener noreferrer">Cómo llegar ↗</a></div>
+      <div><h2>Tu próximo entrenamiento</h2><a href="{% url 'lista-maquinas' %}#buscador">Explorar máquinas</a><a href="{% url 'contacto' %}">Consultar horarios</a><a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" rel="noopener noreferrer">Facebook ↗</a></div>
+    </div>
+    <div class="container footer-bottom"><span>© {% now "Y" %} Fritz Gym</span><span>Hecho para entrenar en Socabaya.</span><a href="{% url 'privacidad' %}">Privacidad</a></div>
+  </footer>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

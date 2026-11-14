@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>{% block title %}Fritz Gym - Fitness Club{% endblock %}</title>
     
     <!-- Favicon -->
@@ -189,11 +190,11 @@
         .capsule-cta {
             background: var(--color-black);
             color: #FFFFFF;
-            padding: 10px 22px;
+            padding: 8px 12px 8px 20px;
             border-radius: var(--radius-capsule);
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
             font-family: var(--font-ui);
             font-size: 0.88rem;
@@ -204,15 +205,27 @@
             transition: var(--transition-bounce);
         }
 
-        .capsule-cta i {
-            color: var(--accent-yellow);
-            font-size: 1rem;
+        .capsule-cta-badge {
+            width: 28px;
+            height: 28px;
+            background: var(--accent-yellow);
+            color: var(--color-black);
+            border-radius: var(--radius-capsule);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            transition: transform 0.25s ease;
         }
 
         .capsule-cta:hover {
             transform: scale(1.04);
             background: #1A1A1A;
             color: var(--accent-yellow);
+        }
+
+        .capsule-cta:hover .capsule-cta-badge {
+            transform: rotate(90deg) scale(1.15);
         }
 
         /* Mobile Hamburger Toggle */
@@ -519,8 +532,9 @@
             </ul>
 
             <!-- 3. CTA Capsule (Desktop) -->
-            <a href="{% url 'contacto' %}" class="capsule-cta">
+            <a href="{% url 'contacto' %}#mapa-exacto" class="capsule-cta" title="Ver ubicación exacta en el mapa de Socabaya">
                 <i class="fa-solid fa-location-dot"></i> Elige un Salón
+                <span class="capsule-cta-badge"><i class="fa-solid fa-crosshairs"></i></span>
             </a>
 
             <!-- Mobile Menu Toggle Button -->
@@ -532,7 +546,8 @@
         <!-- Mobile Drawer -->
         <nav class="mobile-drawer" id="mobileDrawer">
             <a href="{% url 'lista-maquinas' %}">🏋️ Catálogo de Máquinas</a>
-            <a href="{% url 'contacto' %}">📍 Sede Socabaya & Horarios</a>
+            <a href="{% url 'contacto' %}#mapa-exacto">📍 Elige un Salón (Mapa Exacto)</a>
+            <a href="{% url 'contacto' %}">🕒 Horarios de Atención</a>
             <a href="{% url 'sobre-nosotros' %}">⚡ Sobre Fritz Gym</a>
             <a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" style="color: var(--accent-yellow); font-weight: 800;">
                 <i class="fa-brands fa-facebook"></i> Facebook Oficial

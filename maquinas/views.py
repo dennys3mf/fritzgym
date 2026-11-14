@@ -6,6 +6,7 @@ from django.db.models import Q # <-- AÑADE ESTA IMPORTACIÓN
 from io import BytesIO
 import qrcode
 from .models import Maquina, Anuncio # <-- Asegúrate que Anuncio esté aquí
+from .catalogo import GRUPOS, obtener_guia
 
 def lista_maquinas(request):
     """
@@ -40,6 +41,7 @@ def lista_maquinas(request):
         'anuncios_activos': anuncios_activos,
         'grupos_musculares': grupos_musculares, # Pasamos los grupos para los botones
         'query_busqueda': query or "", # Pasamos el término de búsqueda para mostrarlo en la barra
+        'grupo_actual': GRUPOS.get(grupo_filtrado),
     }
     return render(request, 'maquinas/lista_maquinas.html', contexto)
 
@@ -48,6 +50,7 @@ def detalle_maquina(request, maquina_id):
     maquina = get_object_or_404(Maquina, pk=maquina_id)
     contexto = {
         'maquina': maquina,
+        'guia': obtener_guia(maquina),
     }
     return render(request, 'maquinas/detalle_maquina.html', contexto)
 

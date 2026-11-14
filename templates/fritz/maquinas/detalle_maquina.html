@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% block title %}{{ maquina.nombre }} | Fritz Gym{% endblock %}
+{% block content %}
+<div class="detail-wrapper">
+    <div class="detail-top-nav">
+        <a href="{% url 'lista-maquinas' %}" class="btn-back-capsule">
+            Catálogo Completo
+        </a>
+        <a href="{% url 'generar-qr' maquina.id %}" target="_blank" rel="noopener noreferrer" class="btn-qr-capsule">
+            Ver Código QR
+        </a>
+    </div>
+
+    <div class="detail-tag-row">
+        <span class="tag-muscle-pill">
+            {{ maquina.get_grupo_muscular_display }}
+        </span>
+        <span>MÁQUINA #{{ maquina.id }}</span>
+    </div>
+
+    <h1 class="detail-hero-title">{{ maquina.nombre }}</h1>
+
+    <!-- Specs Row with Black Capsules -->
+    <div class="specs-capsules-grid">
+        <div class="spec-capsule">
+            <span class="spec-label">Series Guía</span>
+            <span class="spec-value">3 — 4 Series</span>
+        </div>
+        <div class="spec-capsule">
+            <span class="spec-label">Rango Reps</span>
+            <span class="spec-value">8 — 12 Reps</span>
+        </div>
+        <div class="spec-capsule">
+            <span class="spec-label">Descanso</span>
+            <span class="spec-value">60 — 90s</span>
+        </div>
+        <div class="spec-capsule">
+            <span class="spec-label">Enfoque</span>
+            <span class="spec-value">Hipertrofia</span>
+        </div>
+    </div>
+
+    <p class="training-note">Referencia general de entrenamiento. Ajusta series, repeticiones y descanso con tu entrenador.</p>
+    <article class="detail-main-black-card">
+        <!-- Video -->
+        <div class="tutorial-panel">
+          {% if maquina.video_embed_url %}
+          <div class="video-responsive-box">
+            <iframe
+                loading="lazy" src="{{ maquina.video_embed_url }}"
+                title="Video tutorial de {{ maquina.nombre }}"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+          </div>
+          <div class="tutorial-caption"><p>{% if guia %}Video: {{ guia.autor }}{% else %}Tutorial de ejecución{% endif %}</p><a href="{{ maquina.video_watch_url }}" target="_blank" rel="noopener noreferrer">Ver en YouTube ↗</a></div>
+          {% else %}
+          <div class="tutorial-unavailable"><h2>Video pendiente de actualización</h2><p>Consulta las indicaciones de ejecución y pide al equipo de sala que revise el enlace.</p></div>
+          {% endif %}
+        </div>
+
+        <!-- Timer -->
+        <div class="timer-black-box">
+            <div class="timer-title">
+                Temporizador de Descanso
+            </div>
+            <div class="timer-huge-number" id="timerDisplay" role="timer" aria-label="Tiempo de descanso restante">01:00</div>
+
+            <p class="timer-status" id="timerStatus" role="status">Elige tu descanso y empieza cuando termines la serie.</p><div class="timer-buttons-row" role="group" aria-label="Duración del descanso">
+                <button class="btn-preset-pill" data-time="45">45s</button>
+                <button class="btn-preset-pill active" aria-pressed="true" data-time="60">60s</button>
+                <button class="btn-preset-pill" data-time="90">90s</button>
+                <button class="btn-preset-pill" data-time="120">2m</button>
+                <button class="btn-preset-pill" data-time="180">3m</button>
+            </div>
+
+            <div class="timer-actions">
+                <button class="btn-timer-yellow" id="startTimerBtn">
+                    Iniciar descanso
+                </button>
+                <button class="btn-timer-dark" id="resetTimerBtn">
+                    Reiniciar
+                </button>
+            </div>
+        </div>
+
+        <!-- Technique -->
+        <div>
+            <h2 class="technique-section-title">
+                TÉCNICA Y EJECUCIÓN
+            </h2>
+            <div class="technique-description-text">
+                {% if guia %}
+                    <p class="guide-summary">{{ guia.resumen }}</p>
+                    <div class="guide-columns"><section><h3>Preparación y ejecución</h3><ol class="guide-steps">{% for paso in guia.pasos %}<li>{{ paso }}</li>{% endfor %}</ol></section><section><h3>Errores que debes evitar</h3><ul class="guide-errors">{% for error in guia.errores %}<li>{{ error }}</li>{% endfor %}</ul></section></div>
+                    <p class="guide-note">Empieza con una carga que puedas controlar y adapta el recorrido con tu entrenador. Si aparece dolor, detén el ejercicio.</p>
+                    <a class="text-link guide-source" href="{{ guia.url_video }}" target="_blank" rel="noopener noreferrer">Tutorial original de {{ guia.autor }} ↗</a>
+                {% elif maquina.descripcion %}
+                    {{ maquina.descripcion|linebreaks }}
+                {% else %}
+                    <p>No hay descripción técnica adicional registrada para esta máquina. Consulta el video tutorial para la postura y ejecución correcta.</p>
+                {% endif %}
+            </div>
+        </div>
+    </article>
+</div>
+
+{% endblock %}

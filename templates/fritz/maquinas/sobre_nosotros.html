@@ -1,0 +1,8 @@
+{% extends 'base.html' %}{% load static %}
+{% block title %}Nuestro gimnasio | Fritz Gym{% endblock %}
+{% block content %}
+<div class="container page-container"><section class="page-heading"><p class="section-intro">Esto es Fritz Gym</p><h1>MENOS EXCUSAS.<br>MÁS CONSTANCIA.</h1><p>Un gimnasio de fuerza en Socabaya, Arequipa.<br>Para quienes saben que el progreso se trabaja.</p></section>
+<section class="about-feature"><img src="{% static 'media/gym-floor.jpg' %}" alt="Equipamiento de entrenamiento en una sala de gimnasio, fotografía de recurso" width="1600" height="1067"><div class="about-manifesto"><p>Nuestra forma de entrenar</p><h2>LA TÉCNICA.<br>EL ESFUERZO.<br>LA CONSTANCIA.</h2><p>Creemos en la honestidad del esfuerzo. En aprender cada movimiento, respetar el proceso y volver a intentarlo. Esa es nuestra manera de entender el entrenamiento.</p><span class="small-note">Fotografía de recurso</span></div></section>
+<section class="about-principles" aria-label="Nuestro enfoque"><article><h2>FUERZA CON BASE.</h2><p>Poleas, bancos, mancuernas y máquinas para entrenar con intención. Aprende a ajustar el equipo antes de empezar.</p></article><article><h2>APRENDE EN SALA.</h2><p>Escanea el QR de tu máquina y consulta su video de ejecución. Una guía que puedes llevar en el bolsillo.</p></article><article><h2>CADA PROGRESO CUENTA.</h2><p>Comparte un espacio donde se respeta la concentración, el ritmo y el esfuerzo de cada persona.</p></article></section>
+<section class="visit-banner"><div><p>Tu próxima sesión empieza aquí.</p><h2>HAZLO PARTE<br>DE TU DÍA.</h2></div><a class="button button-yellow" href="{% url 'contacto' %}">Conoce la sede ↗</a></section></div>
+{% endblock %}
