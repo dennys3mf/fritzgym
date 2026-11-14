@@ -4,115 +4,146 @@
 
 {% block style %}
 <style>
-    .detail-container {
-        max-width: 860px;
+    .detail-wrapper {
+        max-width: 900px;
         margin: 0 auto;
     }
 
-    .detail-nav-bar {
+    .detail-top-nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 25px;
     }
 
-    .back-btn {
+    .btn-back-capsule {
+        background: var(--color-black);
+        color: var(--accent-yellow);
+        padding: 10px 22px;
+        border-radius: var(--radius-capsule);
+        text-decoration: none;
+        font-family: var(--font-ui);
+        font-size: 0.9rem;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        color: var(--color-texto-muted);
+        transition: var(--transition-bounce);
+    }
+
+    .btn-back-capsule:hover {
+        background: #222222;
+        transform: scale(1.04);
+    }
+
+    .btn-qr-capsule {
+        background: var(--color-black);
+        color: #FFFFFF;
+        padding: 10px 20px;
+        border-radius: var(--radius-capsule);
         text-decoration: none;
         font-family: var(--font-ui);
-        font-size: 0.95rem;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        transition: color 0.2s ease;
-    }
-
-    .back-btn:hover {
-        color: var(--color-primario);
-    }
-
-    .detail-meta-row {
-        display: flex;
+        font-size: 0.88rem;
+        font-weight: 800;
+        display: inline-flex;
         align-items: center;
-        gap: 12px;
+        gap: 6px;
+        transition: var(--transition-bounce);
+    }
+
+    .btn-qr-capsule:hover {
+        background: #222222;
+        color: var(--accent-yellow);
+    }
+
+    .detail-hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.5px;
+        color: var(--color-black);
+        text-transform: uppercase;
         margin-bottom: 12px;
     }
 
-    .badge-muscle-large {
-        display: inline-flex;
+    .detail-tag-row {
+        display: flex;
         align-items: center;
-        gap: 8px;
-        background: rgba(255, 195, 0, 0.12);
-        color: var(--color-primario);
-        border: 1px solid var(--border-accent);
-        font-family: var(--font-ui);
-        font-size: 0.82rem;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        padding: 5px 14px;
-        border-radius: var(--radius-capsule);
-    }
-
-    .detail-title {
-        font-size: clamp(2rem, 5vw, 3rem);
-        line-height: 1.1;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        margin-bottom: 20px;
-    }
-
-    /* Figma Workout Parameters Bar */
-    .figma-specs-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        gap: 14px;
+        gap: 12px;
         margin-bottom: 25px;
     }
 
-    .spec-card {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-md);
-        padding: 14px 18px;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-
-    .spec-label {
-        font-size: 0.75rem;
+    .tag-muscle-pill {
+        background: var(--color-black);
+        color: var(--accent-yellow);
+        padding: 6px 18px;
+        border-radius: var(--radius-capsule);
         font-family: var(--font-ui);
-        font-weight: 700;
+        font-size: 0.85rem;
+        font-weight: 900;
         letter-spacing: 1px;
         text-transform: uppercase;
-        color: var(--color-texto-dim);
     }
 
-    .spec-value {
-        font-size: 1.15rem;
-        font-family: var(--font-display);
-        font-weight: 700;
-        color: var(--color-primario);
-        letter-spacing: 1px;
-    }
-
-    /* Video Player Box */
-    .video-hero-box {
-        position: relative;
-        overflow: hidden;
-        padding-top: 56.25%; /* 16:9 */
-        border-radius: var(--radius-lg);
-        background: #000000;
-        border: 1px solid var(--border-subtle);
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 195, 0, 0.1);
+    /* Specs Row */
+    .specs-capsules-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
         margin-bottom: 30px;
     }
 
-    .video-hero-box iframe {
+    .spec-capsule {
+        background: var(--color-black);
+        color: #FFFFFF;
+        padding: 14px 22px;
+        border-radius: var(--radius-card);
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .spec-label {
+        font-size: 0.76rem;
+        font-weight: 800;
+        color: var(--text-muted-on-black);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .spec-value {
+        font-family: var(--font-display);
+        font-size: 1.4rem;
+        font-weight: 800;
+        color: var(--accent-yellow);
+        letter-spacing: 1px;
+    }
+
+    /* Main Black Content Card */
+    .detail-main-black-card {
+        background: var(--color-black);
+        color: #FFFFFF;
+        border-radius: var(--radius-card);
+        padding: 32px;
+        margin-bottom: 30px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .video-responsive-box {
+        position: relative;
+        overflow: hidden;
+        padding-top: 56.25%;
+        border-radius: var(--radius-inner);
+        background: #000000;
+        border: 2px solid #222222;
+        margin-bottom: 30px;
+    }
+
+    .video-responsive-box iframe {
         position: absolute;
         top: 0;
         left: 0;
@@ -121,272 +152,224 @@
         border: 0;
     }
 
-    /* --- Interactive Rest Timer Widget (Figma Video Screen) --- */
-    .rest-timer-widget {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
+    /* Rest Timer Widget inside Black Card */
+    .timer-black-box {
+        background: #141414;
+        border: 2px solid #282828;
+        border-radius: var(--radius-inner);
         padding: 24px;
         margin-bottom: 30px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 18px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        gap: 16px;
     }
 
-    .timer-header {
+    .timer-title {
+        font-family: var(--font-display);
+        font-size: 1.15rem;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        color: var(--accent-yellow);
+        text-transform: uppercase;
         display: flex;
         align-items: center;
-        gap: 10px;
-        font-family: var(--font-display);
-        font-size: 1.1rem;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        color: var(--color-primario);
+        gap: 8px;
     }
 
-    .timer-display {
+    .timer-huge-number {
         font-family: var(--font-display);
-        font-size: 3.5rem;
-        font-weight: 700;
+        font-size: 3.8rem;
+        font-weight: 800;
         letter-spacing: 2px;
         color: #FFFFFF;
         line-height: 1;
     }
 
-    .timer-presets {
+    .timer-buttons-row {
         display: flex;
         gap: 10px;
         flex-wrap: wrap;
         justify-content: center;
     }
 
-    .preset-btn {
-        background: var(--bg-surface-elevated);
-        border: 1px solid var(--border-subtle);
-        color: var(--color-texto-muted);
+    .btn-preset-pill {
+        background: #222222;
+        color: #FFFFFF;
+        border: none;
+        padding: 8px 18px;
+        border-radius: var(--radius-capsule);
         font-family: var(--font-ui);
         font-size: 0.88rem;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        padding: 7px 16px;
-        border-radius: var(--radius-capsule);
+        font-weight: 800;
         cursor: pointer;
-        transition: var(--transition-smooth);
+        transition: var(--transition-bounce);
     }
 
-    .preset-btn:hover,
-    .preset-btn.active {
-        background: var(--color-primario);
-        color: #000000;
-        border-color: var(--color-primario);
+    .btn-preset-pill:hover,
+    .btn-preset-pill.active {
+        background: var(--accent-yellow);
+        color: var(--color-black);
     }
 
-    .timer-controls {
+    .timer-actions {
         display: flex;
         gap: 12px;
     }
 
-    .btn-timer-action {
+    .btn-timer-yellow {
+        background: var(--accent-yellow);
+        color: var(--color-black);
+        padding: 11px 24px;
+        border-radius: var(--radius-capsule);
+        font-family: var(--font-ui);
+        font-size: 0.95rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        padding: 10px 22px;
+        transition: var(--transition-bounce);
+    }
+
+    .btn-timer-yellow:hover {
+        background: #FFFFFF;
+        transform: scale(1.04);
+    }
+
+    .btn-timer-dark {
+        background: #252525;
+        color: #FFFFFF;
+        padding: 11px 20px;
         border-radius: var(--radius-capsule);
         font-family: var(--font-ui);
         font-size: 0.92rem;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        cursor: pointer;
+        font-weight: 800;
         border: none;
-        transition: var(--transition-smooth);
+        cursor: pointer;
+        transition: var(--transition-bounce);
     }
 
-    .btn-timer-action.start {
-        background: var(--color-primario);
-        color: #000000;
-    }
-
-    .btn-timer-action.start:hover {
-        background: #FFFFFF;
-    }
-
-    .btn-timer-action.reset {
-        background: var(--bg-surface-elevated);
-        border: 1px solid var(--border-subtle);
-        color: var(--color-texto);
-    }
-
-    .btn-timer-action.reset:hover {
+    .btn-timer-dark:hover {
         background: #333333;
     }
 
-    /* Technique Instructions Box */
-    .technique-box {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        padding: 32px;
-        margin-bottom: 30px;
-    }
-
-    .technique-heading {
-        font-size: 1.5rem;
-        margin-bottom: 18px;
+    /* Biomechanics Box */
+    .technique-section-title {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--accent-yellow);
+        margin-bottom: 16px;
         display: flex;
         align-items: center;
         gap: 10px;
-        color: var(--color-primario);
     }
 
-    .technique-body {
-        color: var(--color-texto);
+    .technique-description-text {
+        color: #E2E2E2;
         font-size: 1.05rem;
         line-height: 1.8;
     }
 
-    .technique-body p {
+    .technique-description-text p {
         margin-bottom: 16px;
-    }
-
-    /* Quick Share Row */
-    .detail-footer-actions {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 15px;
-        padding-top: 15px;
-        border-top: 1px solid var(--border-subtle);
-    }
-
-    .btn-share {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        color: var(--color-texto-muted);
-        padding: 10px 20px;
-        border-radius: var(--radius-capsule);
-        font-family: var(--font-ui);
-        font-size: 0.88rem;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-        text-transform: uppercase;
-        text-decoration: none;
-        cursor: pointer;
-        transition: var(--transition-smooth);
-    }
-
-    .btn-share:hover {
-        background: var(--color-primario);
-        color: #000;
-        border-color: var(--color-primario);
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="detail-container">
-    <div class="detail-nav-bar">
-        <a href="{% url 'lista-maquinas' %}" class="back-btn">
-            <i class="fa-solid fa-arrow-left"></i> Catálogo de Máquinas
+<div class="detail-wrapper">
+    <div class="detail-top-nav">
+        <a href="{% url 'lista-maquinas' %}" class="btn-back-capsule">
+            <i class="fa-solid fa-arrow-left"></i> Catálogo Completo
         </a>
-        <a href="{% url 'generar-qr' maquina.id %}" target="_blank" class="btn-share">
-            <i class="fa-solid fa-qrcode"></i> Ver QR
+        <a href="{% url 'generar-qr' maquina.id %}" target="_blank" class="btn-qr-capsule">
+            <i class="fa-solid fa-qrcode"></i> Ver Código QR
         </a>
     </div>
 
-    <div class="detail-meta-row">
-        <span class="badge-muscle-large">
+    <div class="detail-tag-row">
+        <span class="tag-muscle-pill">
             <i class="fa-solid fa-tag"></i> {{ maquina.get_grupo_muscular_display }}
         </span>
-        <span style="color: var(--color-texto-dim); font-family: var(--font-ui); font-weight: 700;">MÁQUINA #{{ maquina.id }}</span>
+        <span style="font-weight: 800; font-family: var(--font-display); font-size: 1.1rem; color: var(--color-black);">MÁQUINA #{{ maquina.id }}</span>
     </div>
 
-    <h1 class="detail-title">{{ maquina.nombre }}</h1>
+    <h1 class="detail-hero-title">{{ maquina.nombre }}</h1>
 
-    <!-- Figma Workout Parameters Grid -->
-    <div class="figma-specs-grid">
-        <div class="spec-card">
+    <!-- Specs Row with Black Capsules -->
+    <div class="specs-capsules-grid">
+        <div class="spec-capsule">
             <span class="spec-label">Series Guía</span>
             <span class="spec-value">3 — 4 Series</span>
         </div>
-        <div class="spec-card">
-            <span class="spec-label">Repeticiones</span>
+        <div class="spec-capsule">
+            <span class="spec-label">Rango Reps</span>
             <span class="spec-value">8 — 12 Reps</span>
         </div>
-        <div class="spec-card">
-            <span class="spec-label">Descanso Óptimo</span>
+        <div class="spec-capsule">
+            <span class="spec-label">Descanso</span>
             <span class="spec-value">60 — 90s</span>
         </div>
-        <div class="spec-card">
+        <div class="spec-capsule">
             <span class="spec-label">Enfoque</span>
             <span class="spec-value">Hipertrofia</span>
         </div>
     </div>
 
-    <!-- Video Tutorial -->
-    <div class="video-hero-box">
-        <iframe
-            src="{{ maquina.url_video }}"
-            title="Video tutorial de {{ maquina.nombre }}"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-        </iframe>
-    </div>
-
-    <!-- Rest Timer Widget (Figma Workout Companion) -->
-    <div class="rest-timer-widget">
-        <div class="timer-header">
-            <i class="fa-solid fa-stopwatch"></i> Temporizador de Descanso
-        </div>
-        <div class="timer-display" id="timerDisplay">01:00</div>
-        
-        <div class="timer-presets">
-            <button class="preset-btn" data-time="45">45s</button>
-            <button class="preset-btn active" data-time="60">60s</button>
-            <button class="preset-btn" data-time="90">90s</button>
-            <button class="preset-btn" data-time="120">2m</button>
-            <button class="preset-btn" data-time="180">3m</button>
+    <!-- Main Black Card (Video + Timer + Technique) -->
+    <article class="detail-main-black-card">
+        <!-- Video -->
+        <div class="video-responsive-box">
+            <iframe
+                src="{{ maquina.url_video }}"
+                title="Video tutorial de {{ maquina.nombre }}"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
         </div>
 
-        <div class="timer-controls">
-            <button class="btn-timer-action start" id="startTimerBtn">
-                <i class="fa-solid fa-play"></i> Iniciar Descanso
-            </button>
-            <button class="btn-timer-action reset" id="resetTimerBtn">
-                <i class="fa-solid fa-rotate-left"></i> Reiniciar
-            </button>
-        </div>
-    </div>
+        <!-- Timer -->
+        <div class="timer-black-box">
+            <div class="timer-title">
+                <i class="fa-solid fa-stopwatch"></i> Temporizador de Descanso
+            </div>
+            <div class="timer-huge-number" id="timerDisplay">01:00</div>
 
-    <!-- Technique Description -->
-    <div class="technique-box">
-        <h2 class="technique-heading">
-            <i class="fa-solid fa-bullseye"></i> Biomecánica & Consejos de Ejecución
-        </h2>
-        <div class="technique-body">
-            {% if maquina.descripcion %}
-                {{ maquina.descripcion|linebreaks }}
-            {% else %}
-                <p>No hay descripción técnica adicional registrada para esta máquina. Consulta el video tutorial para la postura y ejecución correcta.</p>
-            {% endif %}
-        </div>
-    </div>
+            <div class="timer-buttons-row">
+                <button class="btn-preset-pill" data-time="45">45s</button>
+                <button class="btn-preset-pill active" data-time="60">60s</button>
+                <button class="btn-preset-pill" data-time="90">90s</button>
+                <button class="btn-preset-pill" data-time="120">2m</button>
+                <button class="btn-preset-pill" data-time="180">3m</button>
+            </div>
 
-    <!-- Footer Actions -->
-    <div class="detail-footer-actions">
-        <a href="{% url 'lista-maquinas' %}" class="back-btn">
-            <i class="fa-solid fa-arrow-left"></i> Volver a la Lista
-        </a>
-        <button class="btn-share" onclick="navigator.clipboard.writeText(window.location.href); alert('¡Enlace de la máquina copiado al portapapeles!');">
-            <i class="fa-solid fa-link"></i> Copiar Enlace
-        </button>
-    </div>
+            <div class="timer-actions">
+                <button class="btn-timer-yellow" id="startTimerBtn">
+                    <i class="fa-solid fa-play"></i> Iniciar Descanso
+                </button>
+                <button class="btn-timer-dark" id="resetTimerBtn">
+                    <i class="fa-solid fa-rotate-left"></i> Reiniciar
+                </button>
+            </div>
+        </div>
+
+        <!-- Technique -->
+        <div>
+            <h2 class="technique-section-title">
+                <i class="fa-solid fa-bullseye"></i> Biomecánica & Consejos de Ejecución
+            </h2>
+            <div class="technique-description-text">
+                {% if maquina.descripcion %}
+                    {{ maquina.descripcion|linebreaks }}
+                {% else %}
+                    <p>No hay descripción técnica adicional registrada para esta máquina. Consulta el video tutorial para la postura y ejecución correcta.</p>
+                {% endif %}
+            </div>
+        </div>
+    </article>
 </div>
 
 <!-- Rest Timer Audio & Logic -->
@@ -399,7 +382,7 @@
     const display = document.getElementById('timerDisplay');
     const startBtn = document.getElementById('startTimerBtn');
     const resetBtn = document.getElementById('resetTimerBtn');
-    const presetBtns = document.querySelectorAll('.preset-btn');
+    const presetBtns = document.querySelectorAll('.btn-preset-pill');
 
     function formatTime(seconds) {
         const mins = Math.floor(seconds / 60);
@@ -444,7 +427,7 @@
                     clearInterval(timerInterval);
                     isRunning = false;
                     startBtn.innerHTML = '<i class="fa-solid fa-play"></i> Iniciar Descanso';
-                    startBtn.style.backgroundColor = 'var(--color-primario)';
+                    startBtn.style.backgroundColor = 'var(--accent-yellow)';
                     display.innerText = "¡LISTO!";
                     playBeep();
                 }
@@ -453,7 +436,7 @@
             clearInterval(timerInterval);
             isRunning = false;
             startBtn.innerHTML = '<i class="fa-solid fa-play"></i> Continuar';
-            startBtn.style.backgroundColor = 'var(--color-primario)';
+            startBtn.style.backgroundColor = 'var(--accent-yellow)';
         }
     });
 
@@ -463,7 +446,7 @@
         timeLeft = timerDuration;
         display.innerText = formatTime(timeLeft);
         startBtn.innerHTML = '<i class="fa-solid fa-play"></i> Iniciar Descanso';
-        startBtn.style.backgroundColor = 'var(--color-primario)';
+        startBtn.style.backgroundColor = 'var(--accent-yellow)';
     }
 
     resetBtn.addEventListener('click', resetTimer);

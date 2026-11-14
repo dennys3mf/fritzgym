@@ -1,183 +1,171 @@
 {% extends 'base.html' %}
 
-{% block title %}Sobre Fritz Gym - Old School Fitness Club{% endblock %}
+{% block title %}Sobre Fritz Gym - Filosofía Old School{% endblock %}
 
 {% block style %}
 <style>
+    .about-wrapper {
+        max-width: 960px;
+        margin: 0 auto;
+    }
+
     .about-hero {
-        padding: 40px 0 30px;
-        border-bottom: 1px solid var(--border-subtle);
-        margin-bottom: 40px;
+        padding: 30px 0 20px;
+        margin-bottom: 30px;
     }
 
-    .about-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(255, 195, 0, 0.1);
-        border: 1px solid var(--border-accent);
-        color: var(--color-primario);
+    .about-big-title {
         font-family: var(--font-display);
-        font-size: 0.82rem;
-        font-weight: 700;
-        letter-spacing: 2px;
+        font-size: clamp(2.4rem, 6.5vw, 4.4rem);
+        font-weight: 800;
+        line-height: 0.98;
+        letter-spacing: -0.5px;
+        color: var(--color-black);
         text-transform: uppercase;
-        padding: 6px 14px;
-        border-radius: var(--radius-pill);
-        margin-bottom: 18px;
+        margin-bottom: 14px;
     }
 
-    .about-title {
-        font-size: clamp(2rem, 5vw, 3.4rem);
-        line-height: 1.05;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        margin-bottom: 15px;
-    }
-
-    .about-title span {
-        color: var(--color-primario);
-    }
-
-    .about-subtitle {
-        color: var(--color-texto-muted);
-        font-size: 1.05rem;
+    .about-lead-text {
+        color: var(--color-black);
+        font-size: 1.15rem;
+        font-weight: 600;
         max-width: 650px;
+        margin-bottom: 35px;
     }
 
-    .manifesto-box {
-        background: linear-gradient(135deg, #181818 0%, #111111 100%);
-        border: 1px solid var(--border-accent);
-        border-left: 6px solid var(--color-primario);
-        padding: 35px;
-        border-radius: var(--radius-lg);
-        margin-bottom: 40px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-    }
-
-    .manifesto-quote {
-        font-family: var(--font-display);
-        font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-        font-weight: 700;
-        letter-spacing: 1.5px;
+    /* Manifesto Black Banner */
+    .manifesto-black-card {
+        background: var(--color-black);
         color: #FFFFFF;
-        line-height: 1.2;
+        border-radius: var(--radius-card);
+        padding: 40px;
+        margin-bottom: 40px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .manifesto-big-quote {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 4.5vw, 3rem);
+        font-weight: 800;
+        color: var(--accent-yellow);
+        letter-spacing: 1px;
+        line-height: 1.1;
         margin-bottom: 16px;
     }
 
-    .manifesto-quote span {
-        color: var(--color-primario);
-    }
-
-    .manifesto-desc {
-        color: var(--color-texto-muted);
-        font-size: 1.05rem;
+    .manifesto-text {
+        color: #E0E0E0;
+        font-size: 1.1rem;
         line-height: 1.8;
     }
 
+    /* Pillar Cards Grid */
     .pillars-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 25px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
         margin-bottom: 40px;
     }
 
-    .pillar-card {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        padding: 30px;
-        transition: var(--transition-smooth);
+    .pillar-black-card {
+        background: var(--color-black);
+        color: #FFFFFF;
+        border-radius: var(--radius-card);
+        padding: 32px;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+        transition: var(--transition-bounce);
     }
 
-    .pillar-card:hover {
+    .pillar-black-card:hover {
         transform: translateY(-5px);
-        border-color: var(--border-accent);
     }
 
-    .pillar-icon {
-        width: 50px;
-        height: 50px;
-        border-radius: var(--radius-pill);
-        background: rgba(255, 195, 0, 0.1);
-        border: 1px solid var(--border-accent);
+    .pillar-icon-capsule {
+        width: 52px;
+        height: 52px;
+        border-radius: var(--radius-capsule);
+        background: var(--accent-yellow);
+        color: var(--color-black);
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--color-primario);
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         margin-bottom: 20px;
     }
 
-    .pillar-title {
-        font-size: 1.35rem;
-        font-weight: 700;
+    .pillar-card-title {
+        font-size: 1.45rem;
+        font-weight: 800;
+        color: #FFFFFF;
         margin-bottom: 12px;
     }
 
-    .pillar-desc {
-        color: var(--color-texto-muted);
-        font-size: 0.94rem;
+    .pillar-card-desc {
+        color: var(--text-muted-on-black);
+        font-size: 0.95rem;
         line-height: 1.7;
     }
 </style>
 {% endblock %}
 
 {% block content %}
+<div class="about-wrapper">
     <section class="about-hero">
-        <div class="about-tag">
-            FILOSOFÍA & CULTURA
-        </div>
-        <h1 class="about-title">SOBRE <span>FRITZ GYM</span></h1>
-        <p class="about-subtitle">
-            Un espacio creado para quienes buscan resultados reales mediante esfuerzo constante, técnica pura y la mejor atmósfera de entrenamiento en Arequipa.
+        <h1 class="about-big-title">
+            SOBRE <span>FRITZ GYM</span>
+        </h1>
+        <p class="about-lead-text">
+            Forjando atletas y entusiastas de la fuerza con disciplina real, biomecánica sin ego y el mejor ambiente de entrenamiento en Arequipa.
         </p>
     </section>
 
-    <section class="manifesto-box">
-        <div class="manifesto-quote">
-            "NO GATOS · <span>OLD SCHOOL</span> HARD TRAINING"
+    <!-- Manifesto Banner -->
+    <section class="manifesto-black-card">
+        <div class="manifesto-big-quote">
+            "NO GATOS · OLD SCHOOL HARD TRAINING"
         </div>
-        <p class="manifesto-desc">
-            En Fritz Gym creemos en el entrenamiento honesto. Nuestro compromiso es alejar las distracciones y enfocarnos en lo que verdaderamente funciona: biomecánica adecuada, sobrecarga progresiva y un ambiente que te empuja a superarte en cada repetición.
+        <p class="manifesto-text">
+            En Fritz Gym creemos en la honestidad del esfuerzo. Sin distracciones ni atajos: priorizamos la sobrecarga progresiva, la técnica estricta y una cultura donde cada socio entrena con propósito para alcanzar el éxito.
         </p>
     </section>
 
+    <!-- Pillars Grid -->
     <section class="pillars-grid">
-        <article class="pillar-card">
-            <div class="pillar-icon">
+        <article class="pillar-black-card">
+            <div class="pillar-icon-capsule">
                 <i class="fa-solid fa-dumbbell"></i>
             </div>
-            <h3 class="pillar-title">Entrenamiento Real</h3>
+            <h3 class="pillar-card-title">Equipamiento Sólido</h3>
             <p class="pillar-desc">
-                Equipamiento seleccionado para aislar cada grupo muscular de forma eficiente. Máquinas pesadas, mancuernas sólidas y poleas adaptadas a rangos de movimiento naturales.
+                Máquinas con selector de placas, poleas biomecánicas, mancuernas de alto gramaje y bancos de levantamiento construidos para durar.
             </p>
         </article>
 
-        <article class="pillar-card">
-            <div class="pillar-icon">
+        <article class="pillar-black-card">
+            <div class="pillar-icon-capsule">
                 <i class="fa-solid fa-qrcode"></i>
             </div>
-            <h3 class="pillar-title">Educación Técnica</h3>
+            <h3 class="pillar-card-title">Instrucción Digital QR</h3>
             <p class="pillar-desc">
-                Pioneros en digitalizar la sala de pesas con códigos QR interactivos en cada máquina, para que nunca entrenes a ciegas y prevengas lesiones desde tu primer día.
+                Pioneros en Arequipa en brindar guías técnicas en video accesibles con solo escanear el código QR fijado en cada máquina de la sala.
             </p>
         </article>
 
-        <article class="pillar-card">
-            <div class="pillar-icon">
-                <i class="fa-solid fa-users-line"></i>
+        <article class="pillar-black-card">
+            <div class="pillar-icon-capsule">
+                <i class="fa-solid fa-fire"></i>
             </div>
-            <h3 class="pillar-title">Comunidad & Disciplina</h3>
+            <h3 class="pillar-card-title">Ambiente Motivante</h3>
             <p class="pillar-desc">
-                Un entorno donde principiantes y atletas experimentados comparten el mismo respeto por el esfuerzo. Aquí vienes a entrenar de verdad.
+                Una hermandad deportiva donde se respeta la concentración y el progreso de cada persona que cruza las puertas del gimnasio.
             </p>
         </article>
     </section>
 
     <div style="text-align: center; padding: 20px 0;">
-        <a href="{% url 'contacto' %}" class="btn-cta-header" style="font-size: 1rem; padding: 12px 28px;">
+        <a href="{% url 'contacto' %}" class="btn-card-primary" style="font-size: 1rem; padding: 14px 32px; background: var(--color-black); color: var(--accent-yellow);">
             <i class="fa-solid fa-location-dot"></i> Conoce Nuestra Sede en Socabaya
         </a>
     </div>
+</div>
 {% endblock %}

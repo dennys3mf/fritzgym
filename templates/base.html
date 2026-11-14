@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Fritz Gym - Fitness & Workout Club{% endblock %}</title>
+    <title>{% block title %}Fritz Gym - Fitness Club{% endblock %}</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{% static 'images/logof.svg' %}">
     
-    <!-- Google Fonts: Oswald (Headings/Brutalist) + Plus Jakarta Sans + Lato (Figma Reference Font) -->
+    <!-- Google Fonts: Oswald (Brutalist Athletic) + Plus Jakarta Sans + Lato -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Oswald:wght@600;700;800&family=Plus+Jakarta+Sans:wght@500;700;800;900&display=swap" rel="stylesheet">
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -22,36 +22,32 @@
 
     <style>
         :root {
-            /* Paleta Oficial Fritz Gym x Figma Fitness App Tokens */
-            --color-primario: #FFC300;
-            --color-primario-glow: rgba(255, 195, 0, 0.28);
-            --color-primario-hover: #E5AE00;
+            /* --- Hammer Gym Style: High-Contrast Electric Yellow & Pitch Black --- */
+            --bg-canvas: #FFF700;               /* Amarillo eléctrico principal */
+            --bg-canvas-darker: #F3EB00;
             
-            --bg-base: #0B0E11;
-            --bg-surface: #14181D;
-            --bg-surface-elevated: #1B2127;
-            --bg-surface-card: #181D23;
-            --bg-surface-hover: #222931;
+            --color-black: #000000;             /* Negro puro */
+            --color-black-card: #0A0A0A;        /* Superficie de tarjetas */
+            --color-black-elevated: #161616;
             
-            --border-subtle: rgba(255, 255, 255, 0.07);
-            --border-medium: rgba(255, 255, 255, 0.14);
-            --border-accent: rgba(255, 195, 0, 0.4);
+            --text-on-yellow: #000000;          /* Texto sobre amarillo */
+            --text-on-black: #FFFFFF;           /* Texto sobre negro */
+            --text-muted-on-black: #A8A8A8;
+            --text-muted-on-yellow: rgba(0, 0, 0, 0.7);
             
-            --color-texto: #FFFFFF;
-            --color-texto-muted: #959CA6;
-            --color-texto-dim: #5E6571;
-
+            --accent-yellow: #FFF700;           /* Acento amarillo dentro de lo negro */
+            --accent-glow: rgba(0, 0, 0, 0.25);
+            
             --font-display: 'Oswald', sans-serif;
-            --font-ui: 'Lato', sans-serif;
-            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --font-ui: 'Plus Jakarta Sans', 'Lato', sans-serif;
             
-            --max-width: 1200px;
-            --radius-sm: 8px;
-            --radius-md: 14px;
-            --radius-lg: 20px;
+            --max-width: 1240px;
             --radius-capsule: 9999px;
+            --radius-card: 28px;
+            --radius-inner: 18px;
             
-            --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-bounce: all 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition-smooth: all 0.2s ease;
         }
 
         * {
@@ -65,9 +61,9 @@
         }
 
         body {
-            font-family: var(--font-body);
-            background-color: var(--bg-base);
-            color: var(--color-texto);
+            font-family: var(--font-ui);
+            background-color: var(--bg-canvas);
+            color: var(--text-on-yellow);
             line-height: 1.6;
             min-height: 100vh;
             display: flex;
@@ -76,187 +72,202 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* --- Header & Top Bar Glassmorphism --- */
+        /* --- Header: Black Floating Capsules on Electric Yellow (Hammer Gym Style) --- */
         .site-header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(11, 14, 17, 0.88);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-subtle);
+            padding: 16px 20px;
+            background: var(--bg-canvas);
             transition: var(--transition-smooth);
         }
 
-        .navbar-container {
+        .header-capsules-container {
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 14px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 16px;
         }
 
-        .brand-link {
+        /* 1. Logo Capsule */
+        .capsule-logo {
+            background: var(--color-black);
+            padding: 8px 24px 8px 12px;
+            border-radius: var(--radius-capsule);
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            color: var(--color-texto);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+            transition: var(--transition-bounce);
         }
 
-        .brand-logo {
-            width: 44px;
-            height: 44px;
+        .capsule-logo:hover {
+            transform: scale(1.03);
+        }
+
+        .brand-avatar {
+            width: 40px;
+            height: 40px;
             border-radius: var(--radius-capsule);
-            border: 2px solid var(--color-primario);
-            background: #000;
+            background: var(--accent-yellow);
+            border: 2px solid var(--accent-yellow);
             object-fit: cover;
-            box-shadow: 0 0 14px var(--color-primario-glow);
-            transition: transform 0.3s ease;
         }
 
-        .brand-link:hover .brand-logo {
-            transform: scale(1.06);
-        }
-
-        .brand-text {
+        .brand-words {
             display: flex;
             flex-direction: column;
         }
 
-        .brand-title {
+        .brand-name {
             font-family: var(--font-display);
-            font-size: 1.45rem;
-            font-weight: 700;
-            letter-spacing: 2px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             color: #FFFFFF;
             line-height: 1.1;
         }
 
-        .brand-title span {
-            color: var(--color-primario);
+        .brand-name span {
+            color: var(--accent-yellow);
         }
 
-        .brand-tagline {
-            font-size: 0.68rem;
-            font-weight: 700;
+        .brand-sub {
+            font-size: 0.65rem;
+            font-weight: 800;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: var(--color-primario);
-            opacity: 0.95;
+            color: var(--accent-yellow);
+            opacity: 0.9;
         }
 
-        /* Navigation Links (Desktop) */
-        .nav-links {
+        /* 2. Navigation Capsule (Center) */
+        .capsule-nav {
+            background: var(--color-black);
+            padding: 6px 24px;
+            border-radius: var(--radius-capsule);
             display: flex;
             align-items: center;
-            gap: 28px;
+            gap: 22px;
             list-style: none;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
         }
 
-        .nav-link {
-            text-decoration: none;
-            color: var(--color-texto-muted);
-            font-family: var(--font-ui);
-            font-size: 0.95rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            position: relative;
-            padding: 6px 0;
-            transition: color 0.2s ease;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
+        .capsule-nav a {
             color: #FFFFFF;
+            text-decoration: none;
+            font-family: var(--font-ui);
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            padding: 8px 4px;
+            position: relative;
+            transition: color 0.2s;
         }
 
-        .nav-link.active::after,
-        .nav-link:hover::after {
+        .capsule-nav a:hover,
+        .capsule-nav a.active {
+            color: var(--accent-yellow);
+        }
+
+        .capsule-nav a.active::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: 2px;
             left: 0;
             width: 100%;
             height: 2px;
-            background-color: var(--color-primario);
-            box-shadow: 0 0 8px var(--color-primario);
+            background: var(--accent-yellow);
+            border-radius: 2px;
         }
 
-        /* Header CTA */
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .btn-cta-header {
+        /* 3. CTA Capsule (Right) */
+        .capsule-cta {
+            background: var(--color-black);
+            color: #FFFFFF;
+            padding: 10px 22px;
+            border-radius: var(--radius-capsule);
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background-color: var(--color-primario);
-            color: #000000;
+            gap: 10px;
+            text-decoration: none;
             font-family: var(--font-ui);
             font-size: 0.88rem;
-            font-weight: 900;
-            letter-spacing: 0.5px;
+            font-weight: 800;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: var(--radius-capsule);
-            transition: var(--transition-smooth);
-            box-shadow: 0 4px 14px var(--color-primario-glow);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+            transition: var(--transition-bounce);
         }
 
-        .btn-cta-header:hover {
-            background-color: #FFFFFF;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+        .capsule-cta i {
+            color: var(--accent-yellow);
+            font-size: 1rem;
         }
 
-        /* Mobile Menu Toggle */
-        .mobile-menu-btn {
+        .capsule-cta:hover {
+            transform: scale(1.04);
+            background: #1A1A1A;
+            color: var(--accent-yellow);
+        }
+
+        /* Mobile Hamburger Toggle */
+        .mobile-toggle-btn {
             display: none;
-            background: none;
+            background: var(--color-black);
+            color: var(--accent-yellow);
             border: none;
-            color: #FFFFFF;
-            font-size: 1.4rem;
+            width: 46px;
+            height: 46px;
+            border-radius: var(--radius-capsule);
+            font-size: 1.25rem;
             cursor: pointer;
-            padding: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
-        /* Mobile Nav Drawer */
-        .mobile-nav {
+        /* Mobile Dropdown Drawer */
+        .mobile-drawer {
             display: none;
             position: fixed;
-            top: 73px;
-            left: 0;
-            width: 100%;
-            background: rgba(11, 14, 17, 0.98);
-            backdrop-filter: blur(25px);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 24px 20px;
+            top: 78px;
+            left: 16px;
+            right: 16px;
+            background: var(--color-black);
+            border-radius: var(--radius-card);
+            padding: 24px;
             z-index: 999;
             flex-direction: column;
             gap: 16px;
-            transform: translateY(-100%);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(-20px);
             opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            pointer-events: none;
+            transition: all 0.25s ease;
         }
 
-        .mobile-nav.open {
+        .mobile-drawer.open {
             display: flex;
             transform: translateY(0);
             opacity: 1;
+            pointer-events: auto;
         }
 
-        .mobile-nav .nav-link {
-            font-size: 1.15rem;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        .mobile-drawer a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-family: var(--font-ui);
+            font-size: 1.05rem;
+            font-weight: 700;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .mobile-drawer a:hover {
+            color: var(--accent-yellow);
         }
 
         /* --- Main Content Area --- */
@@ -265,19 +276,20 @@
             width: 100%;
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 28px 20px 80px;
+            padding: 20px 20px 100px;
         }
 
-        /* Typography Defaults */
+        /* Brutalist Headings on Yellow */
         h1, h2, h3, h4, h5, h6 {
             font-family: var(--font-display);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #FFFFFF;
+            letter-spacing: 1px;
+            color: var(--text-on-yellow);
+            font-weight: 800;
         }
 
-        /* --- Floating Capsule Navigation Dock (Figma Reference Component) --- */
-        .figma-floating-dock-wrapper {
+        /* --- Floating Black Capsule Dock (Bottom) --- */
+        .hammer-dock-wrapper {
             position: fixed;
             bottom: 24px;
             left: 0;
@@ -288,21 +300,18 @@
             pointer-events: none;
         }
 
-        .figma-floating-dock {
+        .hammer-dock {
             pointer-events: auto;
-            background: rgba(22, 27, 34, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: var(--radius-capsule);
+            background: var(--color-black);
             padding: 7px 10px;
+            border-radius: var(--radius-capsule);
             display: flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
         }
 
-        .dock-item {
+        .dock-link {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -310,66 +319,38 @@
             padding: 9px 18px;
             border-radius: var(--radius-capsule);
             text-decoration: none;
-            color: var(--color-texto-muted);
-            font-family: var(--font-ui);
-            font-size: 0.88rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            transition: var(--transition-smooth);
-        }
-
-        .dock-item i {
-            font-size: 1.1rem;
-        }
-
-        .dock-item:hover {
             color: #FFFFFF;
-            background: rgba(255, 255, 255, 0.06);
+            font-family: var(--font-ui);
+            font-size: 0.86rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            transition: var(--transition-bounce);
         }
 
-        /* Active Pill in Figma: Solid Accent Color with dark text */
-        .dock-item.active {
-            background-color: var(--color-primario);
-            color: #000000;
-            box-shadow: 0 4px 14px var(--color-primario-glow);
+        .dock-link i {
+            font-size: 1.05rem;
         }
 
-        .dock-item.active i {
-            color: #000000;
+        .dock-link:hover {
+            color: var(--accent-yellow);
         }
 
-        /* Floating Social Button */
-        .boton-flotante-social {
-            position: fixed;
-            right: 24px;
-            bottom: 30px;
-            background-color: var(--color-primario);
-            color: #000000;
-            width: 50px;
-            height: 50px;
-            border-radius: var(--radius-capsule);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            text-decoration: none;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6), 0 0 15px var(--color-primario-glow);
-            z-index: 999;
-            transition: var(--transition-smooth);
+        .dock-link.active {
+            background-color: var(--accent-yellow);
+            color: var(--color-black);
         }
 
-        .boton-flotante-social:hover {
-            background-color: #FFFFFF;
-            transform: scale(1.1) translateY(-2px);
+        .dock-link.active i {
+            color: var(--color-black);
         }
 
-        /* --- Footer --- */
+        /* --- Footer (Black block with yellow typography) --- */
         .site-footer {
             margin-top: auto;
-            background-color: #080A0D;
-            border-top: 1px solid var(--border-subtle);
-            padding: 60px 20px 100px; /* Space for dock */
-            position: relative;
+            background-color: var(--color-black);
+            color: #FFFFFF;
+            padding: 60px 20px 100px;
+            border-top: 5px solid var(--color-black);
         }
 
         .footer-container {
@@ -379,18 +360,18 @@
             grid-template-columns: 2fr 1fr 1fr;
             gap: 40px;
             padding-bottom: 40px;
-            border-bottom: 1px solid var(--border-subtle);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .footer-brand .brand-title {
-            font-size: 1.8rem;
+        .footer-brand .brand-name {
+            font-size: 1.9rem;
             margin-bottom: 12px;
         }
 
         .footer-brand p {
-            color: var(--color-texto-muted);
-            font-size: 0.92rem;
-            max-width: 420px;
+            color: var(--text-muted-on-black);
+            font-size: 0.94rem;
+            max-width: 440px;
             margin-bottom: 20px;
         }
 
@@ -399,34 +380,31 @@
             gap: 12px;
         }
 
-        .social-circle-btn {
-            width: 40px;
-            height: 40px;
+        .social-capsule-btn {
+            width: 42px;
+            height: 42px;
             border-radius: var(--radius-capsule);
-            background: var(--bg-surface);
-            border: 1px solid var(--border-subtle);
+            background: #1A1A1A;
             color: #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: var(--transition-smooth);
-        }
-
-        .social-circle-btn:hover {
-            background-color: var(--color-primario);
-            color: #000000;
-            border-color: var(--color-primario);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px var(--color-primario-glow);
-        }
-
-        .footer-heading {
             font-size: 1.1rem;
-            color: var(--color-primario);
+            text-decoration: none;
+            transition: var(--transition-bounce);
+        }
+
+        .social-capsule-btn:hover {
+            background: var(--accent-yellow);
+            color: var(--color-black);
+            transform: scale(1.1);
+        }
+
+        .footer-col-title {
+            font-size: 1.2rem;
+            color: var(--accent-yellow);
             margin-bottom: 18px;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
         }
 
         .footer-links-list {
@@ -437,27 +415,27 @@
         }
 
         .footer-links-list a {
-            color: var(--color-texto-muted);
+            color: var(--text-muted-on-black);
             text-decoration: none;
             font-size: 0.92rem;
-            transition: color 0.2s ease;
+            transition: color 0.2s;
         }
 
         .footer-links-list a:hover {
-            color: var(--color-primario);
+            color: var(--accent-yellow);
         }
 
-        .footer-info-item {
+        .footer-info-row {
             display: flex;
             align-items: flex-start;
             gap: 10px;
-            color: var(--color-texto-muted);
+            color: var(--text-muted-on-black);
             font-size: 0.9rem;
             margin-bottom: 12px;
         }
 
-        .footer-info-item i {
-            color: var(--color-primario);
+        .footer-info-row i {
+            color: var(--accent-yellow);
             margin-top: 4px;
         }
 
@@ -470,49 +448,47 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 15px;
-            color: var(--color-texto-dim);
+            color: #666666;
             font-size: 0.82rem;
         }
 
         .footer-bottom a {
-            color: var(--color-texto-dim);
+            color: #888888;
             text-decoration: none;
-            transition: color 0.2s;
         }
 
         .footer-bottom a:hover {
-            color: var(--color-primario);
+            color: var(--accent-yellow);
         }
 
         /* Responsive Breakpoints */
         @media (max-width: 900px) {
-            .nav-links, .header-actions {
+            .capsule-nav, .capsule-cta {
                 display: none;
             }
-            .mobile-menu-btn {
-                display: block;
+            .mobile-toggle-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             .footer-container {
                 grid-template-columns: 1fr;
                 gap: 30px;
             }
-            .boton-flotante-social {
-                display: none; /* Mobile uses dock */
-            }
-            .figma-floating-dock {
+            .hammer-dock {
                 width: calc(100% - 32px);
                 max-width: 380px;
                 justify-content: space-between;
             }
-            .dock-item {
+            .dock-link {
                 padding: 8px 12px;
                 font-size: 0.8rem;
                 flex: 1;
             }
-            .dock-item span {
+            .dock-link span {
                 display: none;
             }
-            .dock-item.active span {
+            .dock-link.active span {
                 display: inline;
             }
         }
@@ -523,46 +499,44 @@
 </head>
 <body>
 
-    <!-- Header / Navbar Sticky -->
+    <!-- Header: Black Floating Capsules on Electric Yellow (Hammer Gym Style) -->
     <header class="site-header">
-        <div class="navbar-container">
-            <!-- Brand -->
-            <a href="{% url 'lista-maquinas' %}" class="brand-link">
-                <img src="{% static 'images/logofritzfym.jpg' %}" alt="Logo Fritz Gym" class="brand-logo">
-                <div class="brand-text">
-                    <span class="brand-title">FRITZ <span>GYM</span></span>
-                    <span class="brand-tagline">Old School Fitness</span>
+        <div class="header-capsules-container">
+            <!-- 1. Logo Capsule -->
+            <a href="{% url 'lista-maquinas' %}" class="capsule-logo">
+                <img src="{% static 'images/logofritzfym.jpg' %}" alt="Logo Fritz Gym" class="brand-avatar">
+                <div class="brand-words">
+                    <span class="brand-name">FRITZ <span>GYM</span></span>
+                    <span class="brand-sub">Fitness Club</span>
                 </div>
             </a>
 
-            <!-- Desktop Navigation -->
-            <ul class="nav-links">
-                <li><a href="{% url 'lista-maquinas' %}" class="nav-link {% if request.resolver_match.url_name == 'lista-maquinas' %}active{% endif %}">Máquinas</a></li>
-                <li><a href="{% url 'contacto' %}" class="nav-link {% if request.resolver_match.url_name == 'contacto' %}active{% endif %}">Sede & Horarios</a></li>
-                <li><a href="{% url 'sobre-nosotros' %}" class="nav-link {% if request.resolver_match.url_name == 'sobre-nosotros' %}active{% endif %}">Sobre Nosotros</a></li>
-                <li><a href="{% url 'privacidad' %}" class="nav-link {% if request.resolver_match.url_name == 'privacidad' %}active{% endif %}">Privacidad</a></li>
+            <!-- 2. Nav Capsule (Desktop) -->
+            <ul class="capsule-nav">
+                <li><a href="{% url 'lista-maquinas' %}" class="{% if request.resolver_match.url_name == 'lista-maquinas' %}active{% endif %}">Máquinas</a></li>
+                <li><a href="{% url 'contacto' %}" class="{% if request.resolver_match.url_name == 'contacto' %}active{% endif %}">Sede & Horarios</a></li>
+                <li><a href="{% url 'sobre-nosotros' %}" class="{% if request.resolver_match.url_name == 'sobre-nosotros' %}active{% endif %}">Sobre Nosotros</a></li>
+                <li><a href="{% url 'privacidad' %}" class="{% if request.resolver_match.url_name == 'privacidad' %}active{% endif %}">Privacidad</a></li>
             </ul>
 
-            <!-- Header Actions -->
-            <div class="header-actions">
-                <a href="{% url 'contacto' %}" class="btn-cta-header">
-                    <i class="fa-solid fa-location-dot"></i> Sede Socabaya
-                </a>
-            </div>
+            <!-- 3. CTA Capsule (Desktop) -->
+            <a href="{% url 'contacto' %}" class="capsule-cta">
+                <i class="fa-solid fa-location-dot"></i> Elige un Salón
+            </a>
 
-            <!-- Mobile Hamburger Toggle -->
-            <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir menú">
+            <!-- Mobile Menu Toggle Button -->
+            <button class="mobile-toggle-btn" id="mobileToggleBtn" aria-label="Abrir menú">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
 
         <!-- Mobile Drawer -->
-        <nav class="mobile-nav" id="mobileNav">
-            <a href="{% url 'lista-maquinas' %}" class="nav-link">🏋️ Catálogo de Máquinas</a>
-            <a href="{% url 'contacto' %}" class="nav-link">📍 Sede Socabaya & Horarios</a>
-            <a href="{% url 'sobre-nosotros' %}" class="nav-link">⚡ Sobre Fritz Gym</a>
-            <a href="{% url 'privacidad' %}" class="nav-link">🔒 Política de Privacidad</a>
-            <a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" class="btn-cta-header" style="justify-content: center; margin-top: 10px;">
+        <nav class="mobile-drawer" id="mobileDrawer">
+            <a href="{% url 'lista-maquinas' %}">🏋️ Catálogo de Máquinas</a>
+            <a href="{% url 'contacto' %}">📍 Sede Socabaya & Horarios</a>
+            <a href="{% url 'sobre-nosotros' %}">⚡ Sobre Fritz Gym</a>
+            <a href="{% url 'privacidad' %}">🔒 Política de Privacidad</a>
+            <a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" style="color: var(--accent-yellow); font-weight: 800;">
                 <i class="fa-brands fa-facebook"></i> Facebook Oficial
             </a>
         </nav>
@@ -574,51 +548,46 @@
         {% endblock %}
     </main>
 
-    <!-- Floating Social Button (Desktop) -->
-    <a href="https://www.facebook.com/profile.php?id=100064036540525" class="boton-flotante-social" target="_blank" rel="noopener noreferrer" title="Visita nuestro Facebook">
-        <i class="fa-brands fa-facebook-f"></i>
-    </a>
-
-    <!-- Floating Capsule Navigation Dock (Figma Reference Component: Navigation Bar #88:929) -->
-    <div class="figma-floating-dock-wrapper">
-        <nav class="figma-floating-dock" aria-label="Navegación Rápida">
-            <a href="{% url 'lista-maquinas' %}" class="dock-item {% if request.resolver_match.url_name == 'lista-maquinas' and not request.GET.q %}active{% endif %}">
+    <!-- Floating Black Capsule Dock -->
+    <div class="hammer-dock-wrapper">
+        <nav class="hammer-dock" aria-label="Navegación Rápida">
+            <a href="{% url 'lista-maquinas' %}" class="dock-link {% if request.resolver_match.url_name == 'lista-maquinas' and not request.GET.q %}active{% endif %}">
                 <i class="fa-solid fa-dumbbell"></i>
                 <span>Máquinas</span>
             </a>
-            <a href="{% url 'lista-maquinas' %}#buscador" class="dock-item">
+            <a href="{% url 'lista-maquinas' %}#buscador" class="dock-link">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <span>Buscar</span>
             </a>
-            <a href="{% url 'contacto' %}" class="dock-item {% if request.resolver_match.url_name == 'contacto' %}active{% endif %}">
+            <a href="{% url 'contacto' %}" class="dock-link {% if request.resolver_match.url_name == 'contacto' %}active{% endif %}">
                 <i class="fa-solid fa-clock"></i>
                 <span>Horarios</span>
             </a>
-            <a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" class="dock-item">
+            <a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" class="dock-link">
                 <i class="fa-brands fa-facebook-messenger"></i>
                 <span>Mensaje</span>
             </a>
         </nav>
     </div>
 
-    <!-- Modern Athletic Footer -->
+    <!-- Black Footer -->
     <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-brand">
-                <div class="brand-title">FRITZ <span>GYM</span></div>
+                <div class="brand-name">FRITZ <span>GYM</span></div>
                 <p>Centro de acondicionamiento físico, fuerza y biomecánica en Arequipa. Filosofía <strong>Old School</strong>: entrenamiento auténtico, técnica estricta y resultados reales sin excusas.</p>
                 <div class="footer-social-links">
-                    <a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" class="social-circle-btn" title="Facebook">
+                    <a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" class="social-capsule-btn" title="Facebook">
                         <i class="fa-brands fa-facebook-f"></i>
                     </a>
-                    <a href="https://maps.google.com/?q=Avenida+Socabaya+327+Socabaya+Arequipa" target="_blank" class="social-circle-btn" title="Google Maps">
+                    <a href="https://maps.google.com/?q=Avenida+Socabaya+327+Socabaya+Arequipa" target="_blank" class="social-capsule-btn" title="Google Maps">
                         <i class="fa-solid fa-map-location-dot"></i>
                     </a>
                 </div>
             </div>
 
             <div>
-                <h4 class="footer-heading">Navegación</h4>
+                <h4 class="footer-col-title">Navegación</h4>
                 <ul class="footer-links-list">
                     <li><a href="{% url 'lista-maquinas' %}">Catálogo de Máquinas</a></li>
                     <li><a href="{% url 'contacto' %}">Sede & Horarios de Atención</a></li>
@@ -628,12 +597,12 @@
             </div>
 
             <div>
-                <h4 class="footer-heading">Sede Socabaya</h4>
-                <div class="footer-info-item">
+                <h4 class="footer-col-title">Sede Socabaya</h4>
+                <div class="footer-info-row">
                     <i class="fa-solid fa-location-dot"></i>
                     <span>Av. Socabaya 327, Socabaya, Arequipa 04012</span>
                 </div>
-                <div class="footer-info-item">
+                <div class="footer-info-row">
                     <i class="fa-solid fa-clock"></i>
                     <span>Lun a Vie: 5:00 AM - 10:00 PM<br>Sáb: 6:00 AM - 5:00 PM<br>Dom: 7:00 AM - 1:00 PM</span>
                 </div>
@@ -648,16 +617,15 @@
         </div>
     </footer>
 
-    <!-- Simple JS for Mobile Drawer -->
+    <!-- JS for Mobile Drawer -->
     <script>
-        const toggleBtn = document.getElementById('mobileMenuToggle');
-        const mobileNav = document.getElementById('mobileNav');
-        
-        if (toggleBtn && mobileNav) {
-            toggleBtn.addEventListener('click', () => {
-                mobileNav.classList.toggle('open');
-                const icon = toggleBtn.querySelector('i');
-                if (mobileNav.classList.contains('open')) {
+        const mobileBtn = document.getElementById('mobileToggleBtn');
+        const drawer = document.getElementById('mobileDrawer');
+        if (mobileBtn && drawer) {
+            mobileBtn.addEventListener('click', () => {
+                drawer.classList.toggle('open');
+                const icon = mobileBtn.querySelector('i');
+                if (drawer.classList.contains('open')) {
                     icon.classList.remove('fa-bars');
                     icon.classList.add('fa-xmark');
                 } else {

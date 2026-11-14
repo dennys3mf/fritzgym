@@ -1,321 +1,285 @@
 {% extends 'base.html' %}
 
-{% block title %}Contacto & Horarios Sede Socabaya - Fritz Gym{% endblock %}
+{% block title %}Sede Socabaya & Horarios - Fritz Gym{% endblock %}
 
 {% block style %}
 <style>
-    /* --- EBSH Style Contact Hub --- */
+    /* --- Hammer Gym Style: Contact Hub --- */
     .contact-hero {
-        padding: 40px 0 30px;
-        border-bottom: 1px solid var(--border-subtle);
-        margin-bottom: 40px;
+        padding: 30px 0 20px;
+        margin-bottom: 30px;
     }
 
-    .contact-hero-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        background: rgba(255, 195, 0, 0.1);
-        border: 1px solid var(--border-accent);
-        color: var(--color-primario);
+    .contact-big-title {
         font-family: var(--font-display);
-        font-size: 0.82rem;
-        font-weight: 700;
-        letter-spacing: 2px;
+        font-size: clamp(2.4rem, 6.5vw, 4.4rem);
+        font-weight: 800;
+        line-height: 0.98;
+        letter-spacing: -0.5px;
+        color: var(--color-black);
         text-transform: uppercase;
-        padding: 6px 14px;
-        border-radius: var(--radius-pill);
-        margin-bottom: 18px;
+        margin-bottom: 14px;
     }
 
-    .contact-hero-tag .pulse-dot {
-        width: 8px;
-        height: 8px;
-        background-color: var(--color-primario);
-        border-radius: 50%;
-        box-shadow: 0 0 10px var(--color-primario);
+    .contact-big-title span {
+        text-decoration: underline;
+        text-underline-offset: 6px;
     }
 
-    .contact-hero-title {
-        font-size: clamp(2rem, 5vw, 3.4rem);
-        line-height: 1.05;
-        font-weight: 700;
-        letter-spacing: 1.5px;
-        margin-bottom: 15px;
-    }
-
-    .contact-hero-title span {
-        color: var(--color-primario);
-    }
-
-    .contact-hero-subtitle {
-        color: var(--color-texto-muted);
-        font-size: 1.05rem;
+    .contact-lead-text {
+        color: var(--color-black);
+        font-size: 1.15rem;
+        font-weight: 600;
         max-width: 650px;
+        margin-bottom: 30px;
     }
 
-    /* --- Hub Grid Container --- */
-    .hub-grid {
+    /* Hub Grid: Black Rounded Cards on Yellow */
+    .contact-hub-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 30px;
         margin-bottom: 40px;
     }
 
-    /* Location Main Card */
-    .hub-card {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        padding: 32px;
+    .hub-black-card {
+        background: var(--color-black);
+        color: #FFFFFF;
+        border-radius: var(--radius-card);
+        padding: 36px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        position: relative;
-        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     }
 
-    .hub-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: var(--color-primario);
-    }
-
-    .hub-badge-status {
+    .hub-live-badge {
+        align-self: flex-start;
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        color: #22C55E;
-        background: rgba(34, 197, 94, 0.1);
-        border: 1px solid rgba(34, 197, 94, 0.25);
-        padding: 4px 12px;
-        border-radius: var(--radius-pill);
-        font-family: var(--font-display);
-        font-size: 0.78rem;
-        font-weight: 700;
+        background: var(--accent-yellow);
+        color: var(--color-black);
+        padding: 6px 16px;
+        border-radius: var(--radius-capsule);
+        font-family: var(--font-ui);
+        font-size: 0.8rem;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 22px;
+    }
+
+    .hub-live-badge i {
+        font-size: 0.7rem;
+    }
+
+    .hub-card-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        color: #FFFFFF;
         letter-spacing: 1.5px;
-        text-transform: uppercase;
-        margin-bottom: 20px;
-        align-self: flex-start;
+        margin-bottom: 6px;
     }
 
-    .hub-badge-status .status-dot {
-        width: 8px;
-        height: 8px;
-        background: #22C55E;
-        border-radius: 50%;
-        box-shadow: 0 0 8px #22C55E;
-    }
-
-    .hub-name {
-        font-size: 2rem;
-        font-weight: 700;
-        margin-bottom: 8px;
-        letter-spacing: 2px;
-    }
-
-    .hub-city {
-        color: var(--color-primario);
+    .hub-card-city {
+        color: var(--accent-yellow);
         font-family: var(--font-display);
-        font-size: 0.95rem;
-        font-weight: 700;
+        font-size: 1rem;
+        font-weight: 800;
         letter-spacing: 2px;
         text-transform: uppercase;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
     }
 
-    .hub-detail-box {
-        margin-bottom: 24px;
+    .hub-info-rows {
         display: flex;
         flex-direction: column;
         gap: 16px;
+        margin-bottom: 30px;
     }
 
-    .hub-detail-row {
+    .hub-info-item {
         display: flex;
         align-items: flex-start;
         gap: 14px;
-        color: var(--color-texto-muted);
+        color: var(--text-muted-on-black);
         font-size: 0.98rem;
     }
 
-    .hub-detail-row i {
-        color: var(--color-primario);
-        font-size: 1.2rem;
+    .hub-info-item i {
+        color: var(--accent-yellow);
+        font-size: 1.25rem;
         margin-top: 3px;
         flex-shrink: 0;
     }
 
-    .hub-detail-row strong {
+    .hub-info-item strong {
         color: #FFFFFF;
         display: block;
-        margin-bottom: 3px;
+        margin-bottom: 2px;
     }
 
-    /* Action Buttons (EBSH Style) */
-    .hub-actions {
+    .hub-card-actions {
         display: flex;
         flex-direction: column;
         gap: 12px;
-        margin-top: 15px;
     }
 
-    .btn-hub-action {
+    .btn-capsule-yellow {
+        background: var(--accent-yellow);
+        color: var(--color-black);
+        padding: 14px 24px;
+        border-radius: var(--radius-capsule);
+        font-family: var(--font-ui);
+        font-size: 0.94rem;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-decoration: none;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 10px;
-        padding: 13px 20px;
-        border-radius: var(--radius-pill);
-        font-family: var(--font-display);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+        transition: var(--transition-bounce);
+    }
+
+    .btn-capsule-yellow:hover {
+        background: #FFFFFF;
+        transform: scale(1.03);
+    }
+
+    .btn-capsule-outline {
+        background: #181818;
+        border: 2px solid #333333;
+        color: #FFFFFF;
+        padding: 13px 24px;
+        border-radius: var(--radius-capsule);
+        font-family: var(--font-ui);
         font-size: 0.92rem;
-        font-weight: 700;
-        letter-spacing: 1.5px;
+        font-weight: 800;
+        letter-spacing: 1px;
         text-transform: uppercase;
         text-decoration: none;
-        transition: var(--transition-smooth);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: var(--transition-bounce);
     }
 
-    .btn-hub-action.primary {
-        background: var(--color-primario);
-        color: #000000;
-        box-shadow: 0 4px 15px var(--color-primario-glow);
-    }
-
-    .btn-hub-action.primary:hover {
-        background: #FFFFFF;
-        transform: translateY(-2px);
-    }
-
-    .btn-hub-action.secondary {
-        background: var(--bg-surface-elevated);
-        border: 1px solid var(--border-subtle);
-        color: #FFFFFF;
-    }
-
-    .btn-hub-action.secondary:hover {
-        border-color: var(--color-primario);
-        color: var(--color-primario);
-        transform: translateY(-2px);
+    .btn-capsule-outline:hover {
+        background: var(--accent-yellow);
+        color: var(--color-black);
+        border-color: var(--accent-yellow);
+        transform: scale(1.03);
     }
 
     /* Schedule Card */
-    .schedule-card {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        padding: 32px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
-
-    .schedule-title {
-        font-size: 1.6rem;
+    .schedule-hub-title {
+        font-size: 1.7rem;
+        font-weight: 800;
+        color: #FFFFFF;
         margin-bottom: 24px;
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
     }
 
-    .schedule-title i {
-        color: var(--color-primario);
+    .schedule-hub-title i {
+        color: var(--accent-yellow);
     }
 
-    .schedule-list {
+    .schedule-rows-container {
         display: flex;
         flex-direction: column;
         gap: 14px;
         margin-bottom: 30px;
     }
 
-    .schedule-item {
+    .schedule-row-pill {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 14px 18px;
-        background: var(--bg-surface-elevated);
-        border-radius: var(--radius-sm);
-        border: 1px solid var(--border-subtle);
+        padding: 16px 20px;
+        background: #161616;
+        border-radius: var(--radius-inner);
     }
 
-    .schedule-day {
-        font-family: var(--font-display);
-        font-weight: 700;
-        font-size: 1rem;
-        letter-spacing: 1px;
+    .schedule-row-day {
+        font-family: var(--font-ui);
+        font-weight: 800;
+        font-size: 0.95rem;
         color: #FFFFFF;
+        text-transform: uppercase;
     }
 
-    .schedule-hours {
+    .schedule-row-time {
         font-family: var(--font-display);
-        font-size: 1.05rem;
-        color: var(--color-primario);
-        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--accent-yellow);
+        font-weight: 800;
         letter-spacing: 1.5px;
     }
 
-    .schedule-notice {
-        background: rgba(255, 195, 0, 0.08);
-        border: 1px solid var(--border-accent);
-        padding: 16px;
-        border-radius: var(--radius-md);
+    .schedule-tip-box {
+        background: #181818;
+        border: 1px solid #333333;
+        padding: 18px;
+        border-radius: var(--radius-inner);
+        color: var(--text-muted-on-black);
+        font-size: 0.9rem;
         display: flex;
         align-items: flex-start;
         gap: 12px;
-        color: var(--color-texto-muted);
-        font-size: 0.88rem;
     }
 
-    .schedule-notice i {
-        color: var(--color-primario);
-        margin-top: 3px;
+    .schedule-tip-box i {
+        color: var(--accent-yellow);
+        font-size: 1.1rem;
+        margin-top: 2px;
     }
 
-    /* Map Frame */
-    .map-section {
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        margin-bottom: 40px;
+    /* Map Box on Yellow */
+    .map-capsule-box {
+        background: var(--color-black);
+        border-radius: var(--radius-card);
+        padding: 24px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
     }
 
-    .map-header {
-        padding: 20px 24px;
-        border-bottom: 1px solid var(--border-subtle);
+    .map-capsule-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 18px;
         flex-wrap: wrap;
         gap: 12px;
     }
 
-    .map-title {
-        font-size: 1.25rem;
-        letter-spacing: 1.5px;
+    .map-header-title {
+        color: #FFFFFF;
+        font-size: 1.4rem;
+        font-weight: 800;
         display: flex;
         align-items: center;
         gap: 10px;
     }
 
-    .map-title i {
-        color: var(--color-primario);
+    .map-header-title i {
+        color: var(--accent-yellow);
     }
 
-    .map-iframe-wrapper {
+    .map-render-frame {
         width: 100%;
         height: 380px;
-        filter: invert(90%) hue-rotate(180deg) brightness(95%) contrast(90%);
+        border-radius: var(--radius-inner);
         border: none;
     }
 
     @media (max-width: 860px) {
-        .hub-grid {
+        .contact-hub-grid {
             grid-template-columns: 1fr;
         }
     }
@@ -325,31 +289,28 @@
 {% block content %}
     <!-- Hero Section -->
     <section class="contact-hero">
-        <div class="contact-hero-tag">
-            <span class="pulse-dot"></span>
-            SEDE & CONTACTO
-        </div>
-        <h1 class="contact-hero-title">FRITZ GYM <span>AREQUIPA</span></h1>
-        <p class="contact-hero-subtitle">
-            Visítanos en nuestra sede principal de Socabaya o ponte en contacto con nuestro equipo para inscripciones, planes y asesoramiento técnico.
+        <h1 class="contact-big-title">
+            ELIGE TU SALÓN <span>FRITZ GYM</span>
+        </h1>
+        <p class="contact-lead-text">
+            Entrena en nuestra sede principal de Socabaya. Consulta nuestros horarios de atención continua y ven a darlo todo en cada sesión.
         </p>
     </section>
 
-    <!-- Hub Cards (EBSH Hub Style) -->
-    <section class="hub-grid">
-        <!-- Location Details Card -->
-        <article class="hub-card">
+    <!-- Hub Cards Grid (Hammer Gym Rounded Black Cards) -->
+    <section class="contact-hub-grid">
+        <!-- Location Card -->
+        <article class="hub-black-card">
             <div>
-                <div class="hub-badge-status">
-                    <span class="status-dot"></span>
-                    Atención en Sala
+                <div class="hub-live-badge">
+                    <i class="fa-solid fa-circle"></i> Sede Abierta
                 </div>
-                
-                <h2 class="hub-name">SEDE SOCABAYA</h2>
-                <div class="hub-city">Arequipa, Perú</div>
 
-                <div class="hub-detail-box">
-                    <div class="hub-detail-row">
+                <h2 class="hub-card-title">SEDE SOCABAYA</h2>
+                <div class="hub-card-city">Arequipa, Perú</div>
+
+                <div class="hub-info-rows">
+                    <div class="hub-info-item">
                         <i class="fa-solid fa-location-dot"></i>
                         <div>
                             <strong>Dirección</strong>
@@ -357,70 +318,70 @@
                         </div>
                     </div>
 
-                    <div class="hub-detail-row">
+                    <div class="hub-info-item">
                         <i class="fa-solid fa-dumbbell"></i>
                         <div>
-                            <strong>Instalaciones</strong>
-                            <span>Zona de pesas libres, máquinas de aislamiento, poleas biomecánicas y área cardiovascular.</span>
+                            <strong>Equipamiento</strong>
+                            <span>Máquinas con selector de placas, poleas, mancuernas pesadas y barras olímpicas.</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="hub-actions">
-                <a href="https://maps.google.com/?q=Avenida+Socabaya+327+Socabaya+Arequipa" target="_blank" rel="noopener noreferrer" class="btn-hub-action primary">
-                    <i class="fa-solid fa-map-location-dot"></i> Cómo Llegar en Google Maps
+            <div class="hub-card-actions">
+                <a href="https://maps.google.com/?q=Avenida+Socabaya+327+Socabaya+Arequipa" target="_blank" class="btn-capsule-yellow">
+                    <i class="fa-solid fa-map-location-dot"></i> Abrir en Google Maps
                 </a>
-                <a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" rel="noopener noreferrer" class="btn-hub-action secondary">
-                    <i class="fa-brands fa-facebook"></i> Enviar Mensaje por Facebook
+                <a href="https://www.facebook.com/profile.php?id=100064036540525" target="_blank" class="btn-capsule-outline">
+                    <i class="fa-brands fa-facebook"></i> Contactar por Facebook
                 </a>
             </div>
         </article>
 
-        <!-- Schedules Card -->
-        <article class="schedule-card">
+        <!-- Schedule Card -->
+        <article class="hub-black-card">
             <div>
-                <h2 class="schedule-title">
+                <h2 class="schedule-hub-title">
                     <i class="fa-solid fa-clock"></i> Horario de Atención
                 </h2>
 
-                <div class="schedule-list">
-                    <div class="schedule-item">
-                        <span class="schedule-day">LUNES A VIERNES</span>
-                        <span class="schedule-hours">05:00 AM — 10:00 PM</span>
+                <div class="schedule-rows-container">
+                    <div class="schedule-row-pill">
+                        <span class="schedule-row-day">LUNES A VIERNES</span>
+                        <span class="schedule-row-time">05:00 AM — 10:00 PM</span>
                     </div>
 
-                    <div class="schedule-item">
-                        <span class="schedule-day">SÁBADO</span>
-                        <span class="schedule-hours">06:00 AM — 05:00 PM</span>
+                    <div class="schedule-row-pill">
+                        <span class="schedule-row-day">SÁBADO</span>
+                        <span class="schedule-row-time">06:00 AM — 05:00 PM</span>
                     </div>
 
-                    <div class="schedule-item">
-                        <span class="schedule-day">DOMINGO</span>
-                        <span class="schedule-hours">07:00 AM — 01:00 PM</span>
+                    <div class="schedule-row-pill">
+                        <span class="schedule-row-day">DOMINGO</span>
+                        <span class="schedule-row-time">07:00 AM — 01:00 PM</span>
                     </div>
                 </div>
             </div>
 
-            <div class="schedule-notice">
-                <i class="fa-solid fa-circle-info"></i>
-                <span>Los códigos QR en las máquinas están disponibles en todo momento durante el horario de atención para consultar las técnicas de ejecución desde tu celular.</span>
+            <div class="schedule-tip-box">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>Los códigos QR fijados en las máquinas están siempre activos para consultar la técnica y biomecánica en cualquier momento de tu entrenamiento.</span>
             </div>
         </article>
     </section>
 
     <!-- Map Section -->
-    <section class="map-section">
-        <div class="map-header">
-            <h3 class="map-title">
-                <i class="fa-solid fa-location-crosshairs"></i> Ubicación en el Mapa
+    <section class="map-capsule-box">
+        <div class="map-capsule-header">
+            <h3 class="map-header-title">
+                <i class="fa-solid fa-location-crosshairs"></i> Ubicación Satelital
             </h3>
-            <a href="https://maps.google.com/?q=Avenida+Socabaya+327+Socabaya+Arequipa" target="_blank" class="btn-cta-header">
-                Abrir Mapa Completo <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <a href="https://maps.google.com/?q=Avenida+Socabaya+327+Socabaya+Arequipa" target="_blank" class="btn-capsule-yellow" style="padding: 8px 18px; font-size: 0.8rem;">
+                Ver en Pantalla Completa <i class="fa-solid fa-arrow-up-right-from-square"></i>
             </a>
         </div>
         <iframe 
-            class="map-iframe-wrapper"
+            class="map-render-frame"
             title="Mapa de Fritz Gym Socabaya"
             loading="lazy"
             src="https://maps.google.com/maps?q=Avenida+Socabaya+327+Socabaya+Arequipa&t=&z=16&ie=UTF8&iwloc=&output=embed">

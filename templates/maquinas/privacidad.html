@@ -4,103 +4,113 @@
 
 {% block style %}
 <style>
-    .privacy-container {
-        max-width: 860px;
+    .privacy-wrapper {
+        max-width: 900px;
         margin: 0 auto;
-        background: var(--bg-surface);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-lg);
-        padding: 35px;
     }
 
-    .privacy-header {
-        border-bottom: 1px solid var(--border-subtle);
-        padding-bottom: 20px;
+    .privacy-hero {
+        padding: 30px 0 20px;
         margin-bottom: 25px;
     }
 
-    .privacy-title {
-        font-size: 2.2rem;
-        margin-bottom: 10px;
-    }
-
-    .privacy-date {
-        color: var(--color-primario);
+    .privacy-big-title {
         font-family: var(--font-display);
-        font-size: 0.9rem;
-        letter-spacing: 1.5px;
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -0.5px;
+        color: var(--color-black);
         text-transform: uppercase;
-    }
-
-    .privacy-content h3 {
-        color: var(--color-primario);
-        font-size: 1.3rem;
-        margin-top: 25px;
         margin-bottom: 12px;
     }
 
-    .privacy-content p {
-        color: var(--color-texto-muted);
-        font-size: 0.95rem;
-        margin-bottom: 14px;
+    .privacy-black-card {
+        background: var(--color-black);
+        color: #FFFFFF;
+        border-radius: var(--radius-card);
+        padding: 40px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    }
+
+    .privacy-date-badge {
+        display: inline-block;
+        background: var(--accent-yellow);
+        color: var(--color-black);
+        padding: 5px 16px;
+        border-radius: var(--radius-capsule);
+        font-family: var(--font-ui);
+        font-size: 0.8rem;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 24px;
+    }
+
+    .privacy-black-card h3 {
+        color: var(--accent-yellow);
+        font-size: 1.4rem;
+        margin-top: 26px;
+        margin-bottom: 10px;
+    }
+
+    .privacy-black-card p {
+        color: #E0E0E0;
+        font-size: 1rem;
         line-height: 1.8;
+        margin-bottom: 14px;
     }
 
-    .privacy-content ul {
+    .privacy-black-card ul {
         margin-left: 20px;
-        margin-bottom: 18px;
-        color: var(--color-texto-muted);
-        font-size: 0.95rem;
+        margin-bottom: 16px;
+        color: var(--text-muted-on-black);
     }
 
-    .privacy-content li {
+    .privacy-black-card li {
         margin-bottom: 10px;
         line-height: 1.7;
     }
 
-    .privacy-content a {
-        color: var(--color-primario);
+    .privacy-black-card a {
+        color: var(--accent-yellow);
         text-decoration: underline;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-<div class="privacy-container">
-    <div class="privacy-header">
-        <h1 class="privacy-title">Política de Privacidad</h1>
-        <div class="privacy-date">Fritz Gym · Actualizado: {% now "Y" %}</div>
-    </div>
+<div class="privacy-wrapper">
+    <section class="privacy-hero">
+        <h1 class="privacy-big-title">POLÍTICA DE PRIVACIDAD</h1>
+    </section>
 
-    <div class="privacy-content">
+    <article class="privacy-black-card">
+        <span class="privacy-date-badge">Actualizado: {% now "Y" %}</span>
+
         <p>
-            En Fritz Gym, la privacidad y confianza de nuestros visitantes y atletas es primordial. Este documento detalla cómo se maneja la información técnica y de navegación en nuestra plataforma web.
+            En Fritz Gym, la privacidad y confianza de nuestros atletas y visitantes es fundamental. Este documento detalla cómo se gestiona la información técnica en nuestra plataforma web y catálogo digital.
         </p>
 
         <h3>1. Alcance</h3>
         <p>
-            Esta política rige el sitio web informativo y de códigos QR de Fritz Gym en relación a los servicios y catálogos de máquinas brindados en nuestra sede de Socabaya, Arequipa.
+            Esta política rige el sitio web informativo y el sistema de códigos QR de Fritz Gym para el catálogo de máquinas en nuestra sede de Socabaya, Arequipa.
         </p>
 
-        <h3>2. Datos de Navegación y Cookies</h3>
+        <h3>2. Navegación y Almacenamiento Local</h3>
         <p>
-            Utilizamos tecnologías estándar como cookies y almacenamiento local de navegador (LocalStorage) para mejorar la velocidad de carga de los videos tutoriales, recordar preferencias de visualización y almacenar temporalmente el temporizador de descanso sin recopilar datos personales identificables.
+            Utilizamos tecnologías de almacenamiento local en el navegador (LocalStorage) exclusivamente para recordar los ajustes del temporizador de descanso y la visualización fluida de los videos explicativos, sin recopilar datos de filiación personal.
         </p>
 
-        <h3>3. Publicidad y Servicios Externos (Google AdSense)</h3>
+        <h3>3. Servicios Externos y Publicidad (Google AdSense)</h3>
         <p>
-            Podemos emplear servicios de terceros, tales como Google AdSense o reproductores integrados de YouTube, los cuales pueden emplear cookies con propósitos de análisis y personalización. Para mayor detalle acerca de cómo Google administra la información, puedes consultar su <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de Privacidad</a> o la <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer">Configuración de Anuncios de Google</a>.
+            El sitio puede incluir servicios de terceros como reproductores de YouTube o anuncios mediante Google AdSense. Para conocer las opciones de personalización, visita la <a href="https://policies.google.com/privacy" target="_blank">Política de Privacidad de Google</a>.
         </p>
 
-        <h3>4. Marco Legal</h3>
+        <h3>4. Normativa Legal</h3>
         <p>
-            De conformidad con la <strong>Ley N° 29733 - Ley de Protección de Datos Personales de la República del Perú</strong>, respetamos y garantizamos la seguridad de la información. Al tratarse de un sitio con acceso libre a tutoriales técnicos sin registro obligatorio de contraseñas, no retenemos historiales crediticios ni información bancaria en este servidor.
+            Cumplimos con la <strong>Ley N° 29733 - Ley de Protección de Datos Personales de la República del Perú</strong>. Nuestro servicio es de libre consulta y no solicita contraseñas ni datos bancarios para visualizar los tutoriales biomecánicos.
         </p>
-
-        <h3>5. Contacto</h3>
-        <p>
-            Para cualquier consulta sobre esta política, puedes visitarnos presencialmente en nuestra sede de Avenida Socabaya 327, Socabaya, Arequipa, o comunicarte a través de nuestros canales oficiales.
-        </p>
-    </div>
+    </article>
 </div>
 {% endblock %}
