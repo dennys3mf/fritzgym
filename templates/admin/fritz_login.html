@@ -1,0 +1,8 @@
+{% extends 'admin/login.html' %}
+{% load static %}
+{% block content %}
+<div class="fritz-login-layout">
+  <section class="fritz-login-brand"><a href="{% url 'lista-maquinas' %}" aria-label="Ir al sitio de Fritz Gym"><img src="{% static 'images/logofritzfym.jpg' %}" alt="Fritz Gym, The Old School" width="88" height="88"></a><div><p>El trabajo detrás de cada entrenamiento.</p><h1>EL GIMNASIO,<br>EN ORDEN.</h1><p>Gestiona las fichas, sus tutoriales y los anuncios de Fritz Gym desde un solo lugar.</p></div><span>Catálogo, técnica y comunicación.</span></section>
+  <section class="fritz-login-panel" aria-labelledby="login-title"><div class="fritz-login-top"><a href="{% url 'lista-maquinas' %}">Volver al sitio</a>{% include 'admin/color_theme_toggle.html' %}</div><div class="fritz-login-form"><p class="admin-section-label">Administración de Fritz Gym</p><h2 id="login-title">Accede a tu panel.</h2><p class="login-intro">Introduce tus credenciales para continuar.</p>{{ block.super }}<p class="login-note">Acceso para el equipo autorizado del gimnasio.</p></div></section>
+</div>
+{% endblock %}

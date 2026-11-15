@@ -1,7 +1,112 @@
-{% extends "admin/base_site.html" %}
-{% load static %}
+{% extends 'admin/base.html' %}
+{% load i18n static %}
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | Fritz Gym{% endblock %}
+{% block extrahead %}{{ block.super }}<link rel="icon" href="{% static 'images/logof.svg' %}" type="image/svg+xml"><link rel="preload" href="{% static 'fonts/archivo.ttf' %}" as="font" type="font/ttf" crossorigin><script defer src="{% static 'js/admin_fritz.js' %}"></script>{% endblock %}
+{% block responsive %}{{ block.super }}<link rel="stylesheet" href="{% static 'css/admin_fritz.css' %}">{% endblock %}
 
-{% block extrastyle %}
-  {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/admin_custom.css' %}">
+{% block header %}
+<header id="header" class="admin-header">
+  <div class="admin-header-top">
+    <div id="branding">
+      {% block branding %}
+      <a class="admin-brand" href="{% url 'admin:index' %}">
+        <img src="{% static 'images/logofritzfym.jpg' %}" alt="Fritz Gym" width="44" height="44">
+        <div class="admin-brand-info">
+          <strong class="admin-brand-name">FRITZ GYM</strong>
+          <span class="admin-brand-tag">ADMINISTRACIÓN</span>
+        </div>
+      </a>
+      {% endblock %}
+    </div>
+
+    <div class="admin-header-actions">
+      <a class="admin-visit-site" href="{% url 'lista-maquinas' %}" target="_blank" rel="noopener noreferrer" title="Abrir catálogo público de máquinas">
+        <span>Ver sitio web</span>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
+        </svg>
+      </a>
+
+      {% block usertools %}
+      {% if has_permission %}
+      <div id="user-tools" class="admin-user-tools">
+        <div class="admin-user-pill" title="Usuario conectado">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" class="admin-user-avatar" aria-hidden="true">
+            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+          </svg>
+          <span class="admin-user-name">{% firstof user.get_short_name user.get_username %}</span>
+        </div>
+
+        {% if user.has_usable_password %}
+        <a class="admin-tool-action" href="{% url 'admin:password_change' %}" title="Cambiar mi contraseña">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span>Contraseña</span>
+        </a>
+        {% endif %}
+
+        <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="admin-tool-action admin-logout-btn" title="Cerrar sesión de administrador">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>
+            </svg>
+            <span>Cerrar sesión</span>
+          </button>
+        </form>
+
+        <div class="admin-theme-box">
+          {% include 'admin/color_theme_toggle.html' %}
+        </div>
+      </div>
+      {% endif %}
+      {% endblock %}
+    </div>
+  </div>
+
+  {% block nav-global %}
+  {% if has_permission %}
+  <nav class="admin-topnav" aria-label="Navegación principal del administrador">
+    <div class="admin-topnav-inner">
+      <div class="admin-nav-links">
+        <a href="{% url 'admin:index' %}" {% if request.resolver_match.url_name == 'index' %}aria-current="page"{% endif %}>
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <span>Inicio</span>
+        </a>
+
+        {% if perms.maquinas.view_maquina or perms.maquinas.change_maquina %}
+        <a href="{% url 'admin:maquinas_maquina_changelist' %}" {% if opts.model_name == 'maquina' %}aria-current="page"{% endif %}>
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M6 5v14M18 5v14M2 9v6M22 9v6M6 12h12"/>
+          </svg>
+          <span>Máquinas</span>
+        </a>
+        {% endif %}
+
+        {% if perms.maquinas.view_anuncio or perms.maquinas.change_anuncio %}
+        <a href="{% url 'admin:maquinas_anuncio_changelist' %}" {% if opts.model_name == 'anuncio' %}aria-current="page"{% endif %}>
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span>Anuncios</span>
+        </a>
+        {% endif %}
+      </div>
+
+      <div class="admin-topnav-status">
+        <span class="status-indicator-dot"></span>
+        <span>Fritz Gym Online</span>
+      </div>
+    </div>
+  </nav>
+  {% endif %}
+  {% endblock %}
+</header>
 {% endblock %}
+
+{% block footer %}<div class="admin-footer"><span>Fritz Gym / Gestión de contenido</span><a href="{% url 'lista-maquinas' %}">Volver al sitio web</a></div>{% endblock %}
